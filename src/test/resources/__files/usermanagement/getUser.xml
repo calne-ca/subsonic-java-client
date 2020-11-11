@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subsonic-response
+        xmlns="http://subsonic.org/restapi" status="ok" version="1.15.0">
+    <user username="testUser" email="test@test.com" scrobblingEnabled="true" adminRole="false" settingsRole="false" downloadRole="true" uploadRole="false" playlistRole="true" coverArtRole="false" commentRole="false" podcastRole="false" streamRole="true" jukeboxRole="false" shareRole="false" videoConversionRole="false">
+        <folder>2</folder>
+        <folder>5</folder>
+    </user>
+</subsonic-response>

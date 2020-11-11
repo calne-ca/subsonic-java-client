@@ -1,0 +1,122 @@
+<!--
+
+    Copyright (C) 2020 Joscha Düringer
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<jxb:bindings
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+        xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+        version="2.1">
+
+    <jxb:globalBindings>
+        <xjc:simple/>
+        <xjc:javaType name="java.time.LocalDateTime" xmlType="xs:dateTime" adapter="net.beardbot.subsonic.client.base.LocalDateTimeAdapter" />
+    </jxb:globalBindings>
+
+    <jxb:bindings schemaLocation="subsonic-rest-api-1.15.0.xsd">
+        <!-- Fix album property names -->
+        <jxb:bindings node="//xs:complexType[@name='ArtistWithAlbumsID3']//xs:element[@name='album']">
+            <jxb:property name="albums"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:complexType[@name='SearchResult2']//xs:element[@name='album']">
+            <jxb:property name="albums"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:complexType[@name='SearchResult3']//xs:element[@name='album']">
+            <jxb:property name="albums"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:complexType[@name='AlbumList']//xs:element[@name='album']">
+            <jxb:property name="albums"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:complexType[@name='AlbumList2']//xs:element[@name='album']">
+            <jxb:property name="albums"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:complexType[@name='Starred']//xs:element[@name='album']">
+            <jxb:property name="albums"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:complexType[@name='Starred2']//xs:element[@name='album']">
+            <jxb:property name="albums"/>
+        </jxb:bindings>
+
+        <!-- Fix boolean property names -->
+        <jxb:bindings node="//xs:complexType[@name='Child']//xs:attribute[@name='isDir']">
+            <jxb:property name="dir"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:complexType[@name='Child']//xs:attribute[@name='isVideo']">
+            <jxb:property name="video"/>
+        </jxb:bindings>
+
+        <!-- Fix id property names -->
+        <jxb:bindings node="//xs:complexType[@name='ArtistID3']//xs:attribute[@name='coverArt']">
+            <jxb:property name="coverArtId"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:complexType[@name='AlbumID3']//xs:attribute[@name='coverArt']">
+            <jxb:property name="coverArtId"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:complexType[@name='Child']//xs:attribute[@name='coverArt']">
+            <jxb:property name="coverArtId"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:complexType[@name='Playlist']//xs:attribute[@name='coverArt']">
+            <jxb:property name="coverArtId"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:complexType[@name='PodcastChannel']//xs:attribute[@name='coverArt']">
+            <jxb:property name="coverArtId"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:complexType[@name='Directory']//xs:attribute[@name='parent']">
+            <jxb:property name="parentId"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:complexType[@name='Child']//xs:attribute[@name='parent']">
+            <jxb:property name="parentId"/>
+        </jxb:bindings>
+
+        <!-- Fix text content property names -->
+        <jxb:bindings node="//xs:complexType[@name='Genre']">
+            <jxb:property name="name"/>
+        </jxb:bindings>
+
+        <!-- Custom error code enum mappings -->
+        <jxb:bindings node="//xs:simpleType[@name='ErrorCode']">
+            <jxb:typesafeEnumClass name="ErrorCode"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:simpleType[@name='ErrorCode']/xs:restriction/xs:enumeration[@value='0']">
+            <jxb:typesafeEnumMember name="GENERIC_ERROR"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:simpleType[@name='ErrorCode']/xs:restriction/xs:enumeration[@value='10']">
+            <jxb:typesafeEnumMember name="REQUIRED_PARAMETER_MISSING"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:simpleType[@name='ErrorCode']/xs:restriction/xs:enumeration[@value='20']">
+            <jxb:typesafeEnumMember name="INCOMPATIBLE_VERSION_CLIENT"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:simpleType[@name='ErrorCode']/xs:restriction/xs:enumeration[@value='30']">
+            <jxb:typesafeEnumMember name="INCOMPATIBLE_VERSION_SERVER"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:simpleType[@name='ErrorCode']/xs:restriction/xs:enumeration[@value='40']">
+            <jxb:typesafeEnumMember name="WRONG_USERNAME_OR_PASSWORD"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:simpleType[@name='ErrorCode']/xs:restriction/xs:enumeration[@value='41']">
+            <jxb:typesafeEnumMember name="TOKEN_AUTHENTICATION_NOT_SUPPORTED"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:simpleType[@name='ErrorCode']/xs:restriction/xs:enumeration[@value='50']">
+            <jxb:typesafeEnumMember name="USER_NOT_AUTHORIZED"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:simpleType[@name='ErrorCode']/xs:restriction/xs:enumeration[@value='60']">
+            <jxb:typesafeEnumMember name="TRIAL_PERIOD_OVER"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:simpleType[@name='ErrorCode']/xs:restriction/xs:enumeration[@value='70']">
+            <jxb:typesafeEnumMember name="DATA_NOT_FOUND"/>
+        </jxb:bindings>
+    </jxb:bindings>
+</jxb:bindings>

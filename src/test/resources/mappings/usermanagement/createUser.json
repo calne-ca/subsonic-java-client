@@ -1,0 +1,81 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/rest/createUser.*musicFolderId=15&musicFolderId=16.*",
+    "queryParameters" : {
+      "u" : {
+        "equalTo" : "testUser"
+      },
+      "s" : {
+        "matches" : "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+      },
+      "t" : {
+        "matches" : "^[a-f0-9]{32}$"
+      },
+      "v" : {
+        "equalTo" : "1.15.0"
+      },
+      "f" : {
+        "equalTo" : "xml"
+      },
+      "c" : {
+        "equalTo" : "testClient"
+      },
+      "username" : {
+        "equalTo" : "testUser2"
+      },
+      "password" : {
+        "equalTo" : "testPassword2"
+      },
+      "email" : {
+        "equalTo" : "test@test.com"
+      },
+      "ldapAuthenticated" : {
+        "equalTo" : "true"
+      },
+      "adminRole" : {
+        "equalTo" : "true"
+      },
+      "settingsRole" : {
+        "equalTo" : "true"
+      },
+      "streamRole" : {
+        "equalTo" : "true"
+      },
+      "jukeboxRole" : {
+        "equalTo" : "true"
+      },
+      "downloadRole" : {
+        "equalTo" : "true"
+      },
+      "uploadRole" : {
+        "equalTo" : "true"
+      },
+      "playlistRole" : {
+        "equalTo" : "true"
+      },
+      "coverArtRole" : {
+        "equalTo" : "true"
+      },
+      "commentRole" : {
+        "equalTo" : "true"
+      },
+      "podcastRole" : {
+        "equalTo" : "true"
+      },
+      "shareRole" : {
+        "equalTo" : "true"
+      },
+      "videoConversionRole" : {
+        "equalTo" : "true"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "usermanagement/createUser.xml",
+    "headers": {
+      "Content-Type": "text/xml;charset=UTF-8"
+    }
+  }
+}

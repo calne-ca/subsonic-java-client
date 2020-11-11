@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subsonic-response
+        xmlns="http://subsonic.org/restapi" status="ok" version="1.15.0">
+    <artists ignoredArticles="The El La Los Las Le Les">
+        <index name="S">
+            <artist id="154" name="Scythe of Luna" coverArt="ar-154" albumCount="2"/>
+            <artist id="171" name="SHEBA" coverArt="ar-171" albumCount="1"/>
+        </index>
+        <index name="#">
+            <artist id="301" name="µ's" coverArt="ar-301" albumCount="2"/>
+            <artist id="76" name="19's Sound Factory" coverArt="ar-76" albumCount="1"/>
+        </index>
+    </artists>
+</subsonic-response>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subsonic-response
+        xmlns="http://subsonic.org/restapi" status="ok" version="1.15.0">
+    <indexes lastModified="1604264022000" ignoredArticles="The El La Los Las Le Les">
+        <index name="A">
+            <artist id="6455" name="Acchi Kocchi"/>
+            <artist id="15453" name="Aimer"/>
+        </index>
+        <index name="#">
+            <artist id="15778" name="2NE1"/>
+            <artist id="20636" name="人間椅子"/>
+        </index>
+    </indexes>
+</subsonic-response>

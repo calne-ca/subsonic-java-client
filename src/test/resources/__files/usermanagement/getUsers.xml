@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subsonic-response
+        xmlns="http://subsonic.org/restapi" status="ok" version="1.15.0">
+    <users>
+        <user username="admin" scrobblingEnabled="true" adminRole="true" settingsRole="true" downloadRole="true" uploadRole="true" playlistRole="true" coverArtRole="true" commentRole="true" podcastRole="true" streamRole="true" jukeboxRole="true" shareRole="true" videoConversionRole="false">
+            <folder>2</folder>
+            <folder>3</folder>
+            <folder>4</folder>
+            <folder>5</folder>
+        </user>
+        <user username="testUser" email="test@test.com" scrobblingEnabled="true" adminRole="false" settingsRole="false" downloadRole="true" uploadRole="false" playlistRole="true" coverArtRole="false" commentRole="false" podcastRole="false" streamRole="true" jukeboxRole="false" shareRole="false" videoConversionRole="false">
+            <folder>2</folder>
+            <folder>5</folder>
+        </user>
+    </users>
+</subsonic-response>

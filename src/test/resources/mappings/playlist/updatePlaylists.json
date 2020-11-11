@@ -1,0 +1,45 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/rest/updatePlaylist.*songIndexToRemove=1.*songIndexToRemove=2.*songIdToAdd=11.*songIdToAdd=12.*",
+    "queryParameters" : {
+      "u" : {
+        "equalTo" : "testUser"
+      },
+      "s" : {
+        "matches" : "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+      },
+      "t" : {
+        "matches" : "^[a-f0-9]{32}$"
+      },
+      "v" : {
+        "equalTo" : "1.15.0"
+      },
+      "f" : {
+        "equalTo" : "xml"
+      },
+      "c" : {
+        "equalTo" : "testClient"
+      },
+      "playlistId" : {
+        "equalTo" : "1"
+      },
+      "name" : {
+        "equalTo" : "testPlaylist2"
+      },
+      "comment" : {
+        "equalTo" : "testComment"
+      },
+      "public" : {
+        "equalTo" : "false"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "playlist/updatePlaylist.xml",
+    "headers": {
+      "Content-Type": "text/xml;charset=UTF-8"
+    }
+  }
+}

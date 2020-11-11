@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subsonic-response
+        xmlns="http://subsonic.org/restapi" status="ok" version="1.15.0">
+    <song id="5551" parent="5547" isDir="false" title="Crystal Dream" album="Power Flower" artist="Scythe of Luna" track="1" year="2016" coverArt="5547" size="41690068" contentType="audio/flac" suffix="flac" transcodedContentType="audio/mpeg" transcodedSuffix="mp3" duration="333" bitRate="998" path="Vocaloid/Scythe of Luna/[2016] Power Flower/01. Crystal Dream.flac" isVideo="false" playCount="27" created="2018-05-20T15:02:36.000Z" albumId="425" artistId="154" type="music"/>
+</subsonic-response>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subsonic-response
+        xmlns="http://subsonic.org/restapi" status="ok" version="1.15.0">
+    <playlists>
+        <playlist id="32" name="Pop" comment="Auto-imported from Pop.m3u" owner="admin" public="true" songCount="202" duration="46763" created="2019-03-02T18:52:03.662Z" changed="2020-11-14T03:00:31.549Z" coverArt="pl-32"/>
+        <playlist id="23" name="Rap" comment="Auto-imported from Rap.m3u" owner="admin" public="true" songCount="71" duration="16902" created="2019-01-07T21:52:04.187Z" changed="2020-11-14T03:00:31.648Z" coverArt="pl-23"/>
+    </playlists>
+</subsonic-response>

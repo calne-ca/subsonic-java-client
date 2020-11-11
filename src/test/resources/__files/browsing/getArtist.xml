@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subsonic-response
+        xmlns="http://subsonic.org/restapi" status="ok" version="1.15.0">
+    <artist id="154" name="Scythe of Luna" coverArt="ar-154" albumCount="2">
+        <album id="425" name="Power Flower" artist="Scythe of Luna" artistId="154" coverArt="al-425" songCount="15" duration="4031" created="2018-05-20T15:02:36.000Z" year="2016"/>
+        <album id="1933" name="The Last Eclipse ~Trial of Hecate~" artist="Scythe of Luna" artistId="154" coverArt="al-1933" songCount="1" duration="300" created="2020-04-23T18:01:08.000Z" year="2020"/>
+    </artist>
+</subsonic-response>

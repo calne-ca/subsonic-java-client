@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subsonic-response
+        xmlns="http://subsonic.org/restapi" status="ok" version="1.15.0">
+    <musicFolders>
+        <musicFolder id="2" name="Anime"/>
+        <musicFolder id="3" name="K-Pop"/>
+        <musicFolder id="4" name="Non-JP"/>
+        <musicFolder id="5" name="JP"/>
+    </musicFolders>
+</subsonic-response>

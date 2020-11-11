@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subsonic-response
+        xmlns="http://subsonic.org/restapi" status="ok" version="1.15.0">
+    <searchResult3>
+        <artist id="186" name="REOL" coverArt="ar-186" albumCount="2"/>
+        <album id="507" name="Σ" artist="REOL" artistId="186" coverArt="al-507" songCount="13" duration="2799" created="2018-04-27T05:36:59.000Z" year="2016"/>
+        <song id="6287" parent="6258" isDir="false" title="VIP KID" album="Σ" artist="REOL" track="1" year="2016" coverArt="6258" size="58501827" contentType="audio/flac" suffix="flac" transcodedContentType="audio/mpeg" transcodedSuffix="mp3" duration="232" bitRate="1999" path="REOL/[2016] Σ/01. VIP KID.flac" isVideo="false" playCount="31" created="2018-04-27T05:36:59.000Z" albumId="507" artistId="186" type="music"/>
+    </searchResult3>
+</subsonic-response>

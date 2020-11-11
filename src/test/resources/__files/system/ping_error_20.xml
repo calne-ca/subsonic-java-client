@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subsonic-response
+        xmlns="http://subsonic.org/restapi" status="failed" version="1.15.0">
+    <error code="20" message="Incompatible Airsonic REST protocol version. Client must upgrade."/>
+</subsonic-response>

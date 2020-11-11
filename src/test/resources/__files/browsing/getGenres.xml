@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subsonic-response
+        xmlns="http://subsonic.org/restapi" status="ok" version="1.15.0">
+    <genres>
+        <genre songCount="121" albumCount="11">Metal</genre>
+        <genre songCount="97" albumCount="7">Rap</genre>
+        <genre songCount="73" albumCount="7">K-Pop</genre>
+    </genres>
+</subsonic-response>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subsonic-response
+        xmlns="http://subsonic.org/restapi" status="ok" version="1.15.0">
+    <directory id="14584" name="BLACKPINK" playCount="12">
+        <child id="14585" parent="14584" isDir="true" title="[2017] BLACKPINK" album="BLACKPINK" artist="BLACKPINK" year="2017" genre="J-Pop" coverArt="14585" playCount="516" created="2018-07-24T16:59:22.000Z"/>
+        <child id="14586" parent="14584" isDir="true" title="[2018] SQUARE UP" album="SQUARE UP" artist="BLACKPINK" year="2018" genre="K-Pop" coverArt="14586" playCount="294" created="2018-07-24T16:59:55.000Z"/>
+    </directory>
+</subsonic-response>

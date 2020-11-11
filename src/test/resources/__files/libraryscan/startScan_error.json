@@ -1,0 +1,7 @@
+{
+  "timestamp": 1605901347826,
+  "status": 403,
+  "error": "Forbidden",
+  "message": "Access is denied",
+  "path": "/airsonic/rest/startScan"
+}
