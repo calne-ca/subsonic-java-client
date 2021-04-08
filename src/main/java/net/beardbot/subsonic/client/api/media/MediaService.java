@@ -24,6 +24,7 @@ import net.beardbot.subsonic.client.utils.JaxbUtil;
 import org.subsonic.restapi.ErrorCode;
 import org.subsonic.restapi.SubsonicResponse;
 
+import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,17 +43,21 @@ public class MediaService {
 
     @SneakyThrows
     public InputStream stream(String id){
+        var url = streamUrl(id);
+        log.debug("Fetching audio stream '{}'.", url);
+
+        return safeOpenStream(url);
+    }
+
+    @SneakyThrows
+    public URL streamUrl(String id){
         var params = StreamParams.create()
                 .format(subsonic.getPreferences().getStreamFormat())
                 .maxBitRate(subsonic.getPreferences().getStreamBitRate()).getParamMap();
 
         params.put("id", Collections.singletonList(id));
 
-        log.debug("Fetching audio stream with params '{}'.", params);
-
-        URL url = subsonic.createUrl("stream", params);
-
-        return safeOpenStream(url);
+        return subsonic.createUrl("stream", params);
     }
 
     @SneakyThrows
@@ -60,7 +65,7 @@ public class MediaService {
         var params = DownloadParams.create().id(id);
         log.debug("Downloading song with params '{}'.", params.getParamMapForLogging());
 
-        URL url = subsonic.createUrl("download", params.getParamMap());
+        var url = subsonic.createUrl("download", params.getParamMap());
 
         return safeOpenStream(url);
     }
@@ -76,7 +81,7 @@ public class MediaService {
 
         log.debug("Downloading cover art with params '{}'.", params);
 
-        URL url = subsonic.createUrl("getCoverArt", params);
+        var url = subsonic.createUrl("getCoverArt", params);
 
         return safeOpenStream(url);
     }
@@ -91,7 +96,7 @@ public class MediaService {
 
         log.debug("Downloading avatar with params '{}'.", params.getParamMapForLogging());
 
-        URL url = subsonic.createUrl("getAvatar", params.getParamMap());
+        var url = subsonic.createUrl("getAvatar", params.getParamMap());
 
         return safeOpenStream(url);
     }
@@ -105,7 +110,7 @@ public class MediaService {
             if (connection.getContentType().contains("xml")){
                 handleError(JaxbUtil.unmarshall(inputStream, SubsonicResponse.class));
             }
-            return inputStream;
+            return new BufferedInputStream(inputStream);
         } catch (FileNotFoundException e) {
             throw new SubsonicException(ErrorCode.DATA_NOT_FOUND, "The requested data was not found.");
         } catch (IOException e) {

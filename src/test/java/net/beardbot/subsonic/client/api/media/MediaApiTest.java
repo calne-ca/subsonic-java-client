@@ -24,6 +24,8 @@ import ru.lanwen.wiremock.ext.WiremockResolver;
 import ru.lanwen.wiremock.ext.WiremockUriResolver;
 import ru.lanwen.wiremock.ext.WiremockUriResolver.WiremockUri;
 
+import java.io.IOException;
+
 import static net.beardbot.subsonic.client.api.TestUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -41,6 +43,13 @@ public class MediaApiTest {
     @Test
     void stream_error(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
         assertSubsonicError(()->subsonic(uri).media().stream("999999999999"), subsonicError());
+    }
+
+    @Test
+    void streamUrl(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) throws IOException {
+        var url = subsonic(uri).media().streamUrl("6303");
+        assertThat(url.getQuery()).contains("id=6303");
+        assertThat(toByteArray(url.openStream())).startsWith(0x49, 0x44, 0x33);
     }
 
     @Test
