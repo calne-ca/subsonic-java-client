@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.0] - 2021-09-26
+
+### Added 
+
+- New method *subsonic.media().getCoverArtUrl(songId)* that returns a URL without reading from it.
+
 ## [0.2.0] - 2021-04-08
 
 ### Added 

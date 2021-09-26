@@ -22,7 +22,10 @@
         "equalTo" : "testClient"
       },
       "id" : {
-        "equalTo" : "20958"
+        "equalTo" : "20959"
+      },
+      "size" : {
+        "equalTo" : "500"
       }
     }
   },

@@ -76,14 +76,20 @@ public class MediaService {
 
     @SneakyThrows
     public InputStream getCoverArt(String id, CoverArtParams coverArtParams){
+        var url = getCoverArtUrl(id, coverArtParams);
+        log.debug("Fetching cover art with params '{}'.", coverArtParams);
+        return safeOpenStream(url);
+    }
+
+    public URL getCoverArtUrl(String id){
+        return getCoverArtUrl(id, CoverArtParams.create());
+    }
+
+    public URL getCoverArtUrl(String id, CoverArtParams coverArtParams){
         var params = coverArtParams.getParamMap();
         params.put("id",Collections.singletonList(id));
 
-        log.debug("Downloading cover art with params '{}'.", params);
-
-        var url = subsonic.createUrl("getCoverArt", params);
-
-        return safeOpenStream(url);
+        return subsonic.createUrl("getCoverArt", params);
     }
 
     public InputStream getAvatar(){

@@ -65,6 +65,12 @@ public class MediaApiTest {
 
     @Test
     void getCoverArt(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
+        var inputStream = subsonic(uri).media().getCoverArt("20958");
+        assertThat(toByteArray(inputStream)).containsSequence(0x4A, 0x46, 0x49, 0x46);
+    }
+
+    @Test
+    void getCoverArt_withParams(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
         var inputStream = subsonic(uri).media().getCoverArt("20959", CoverArtParams.create().size(500));
         assertThat(toByteArray(inputStream)).containsSequence(0x4A, 0x46, 0x49, 0x46);
     }
@@ -72,6 +78,19 @@ public class MediaApiTest {
     @Test
     void getCoverArt_error(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
         assertSubsonicError(()->subsonic(uri).media().getCoverArt("999999999999"), subsonicError());
+    }
+
+    @Test
+    void getCoverArtUrl(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) throws IOException {
+        var url = subsonic(uri).media().getCoverArtUrl("20958");
+        assertThat(toByteArray(url.openStream())).containsSequence(0x4A, 0x46, 0x49, 0x46);
+    }
+
+    @Test
+    void getCoverArtUrl_withParams(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) throws IOException {
+        var url = subsonic(uri).media().getCoverArtUrl("20959", CoverArtParams.create().size(500));
+        assertThat(url.getQuery()).contains("size=500");
+        assertThat(toByteArray(url.openStream())).containsSequence(0x4A, 0x46, 0x49, 0x46);
     }
 
     @Test
