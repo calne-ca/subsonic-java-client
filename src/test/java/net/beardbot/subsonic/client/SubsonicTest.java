@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2020 Joscha Düringer
  *
  * This program is free software: you can redistribute it and/or modify
