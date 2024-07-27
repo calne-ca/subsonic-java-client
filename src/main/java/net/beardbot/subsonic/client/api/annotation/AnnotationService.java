@@ -34,14 +34,14 @@ public class AnnotationService {
     }
 
     public void scrobble(String id){
-        log.debug("Scrobbling song id with '{}'.", id);
+        log.debug("Scrobbling song with id '{}'.", id);
 
         var response = annotationClient.scrobble(id, true);
         handleError(response);
     }
 
     public void scrobble(String id, long timeInMillis){
-        log.debug("Scrobbling song id with '{}' at time {}.", id, timeInMillis);
+        log.debug("Scrobbling song with id '{}' at time {}.", id, timeInMillis);
 
         var response = annotationClient.scrobble(id, true, timeInMillis);
         handleError(response);
@@ -51,6 +51,48 @@ public class AnnotationService {
         log.debug("Scrobbling now playing for song id '{}'.", id);
 
         var response = annotationClient.scrobble(id, false);
+        handleError(response);
+    }
+
+    public void star(String id){
+        log.debug("Starring item with id '{}'.", id);
+
+        var response = annotationClient.starById(id);
+        handleError(response);
+    }
+
+    public void starAlbumID3(String albumId){
+        log.debug("Starring album with id '{}'.", albumId);
+
+        var response = annotationClient.starByAlbumId(albumId);
+        handleError(response);
+    }
+
+    public void starArtistID3(String artistId){
+        log.debug("Starring artist with id '{}'.", artistId);
+
+        var response = annotationClient.starByArtistId(artistId);
+        handleError(response);
+    }
+
+    public void unstar(String id){
+        log.debug("Unstarring item with id '{}'.", id);
+
+        var response = annotationClient.unstarById(id);
+        handleError(response);
+    }
+
+    public void unstarAlbumID3(String albumId){
+        log.debug("Unstarring album with id '{}'.", albumId);
+
+        var response = annotationClient.unstarByAlbumId(albumId);
+        handleError(response);
+    }
+
+    public void unstarArtistID3(String artistId){
+        log.debug("Unstarring artist with id '{}'.", artistId);
+
+        var response = annotationClient.unstarByArtistId(artistId);
         handleError(response);
     }
 }

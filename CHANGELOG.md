@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.4.0] - 2024-07-27
+
+### Added
+
+- Migration to Java 17
+- New API implementations:
+  - Lists
+    - getStarred
+    - getStarred2
+  - Annotation
+    - star
+    - unstar
+
+### Fixed
+
+- Fixed incompatibility with time-zoned date time strings in created/starred fields
+
 ## [0.3.0] - 2021-09-26
 
 ### Added 

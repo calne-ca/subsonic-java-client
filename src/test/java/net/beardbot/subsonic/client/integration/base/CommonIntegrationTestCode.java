@@ -229,6 +229,37 @@ public class CommonIntegrationTestCode {
 
         var song = subsonic.searching().search3("2 seconds").getSongs().get(0);
         subsonic.annotation().scrobble(song.getId(), System.currentTimeMillis());
+
+        subsonic.annotation().star(song.getId());
+
+        var starred = subsonic.lists().getStarred();
+        assertThat(starred.getSongs()).hasSize(1);
+        assertThat(starred.getSongs().get(0).getId()).isEqualTo(song.getId());
+
+        var starred2 = subsonic.lists().getStarred2();
+        assertThat(starred2.getSongs()).hasSize(1);
+        assertThat(starred2.getSongs().get(0).getId()).isEqualTo(song.getId());
+
+        subsonic.annotation().unstar(song.getId());
+
+        starred = subsonic.lists().getStarred();
+        assertThat(starred.getSongs()).hasSize(0);
+
+        starred2 = subsonic.lists().getStarred2();
+        assertThat(starred2.getSongs()).hasSize(0);
+
+        var artist = subsonic.searching().search3("Misc Artist").getArtists().get(0);
+
+        subsonic.annotation().starArtistID3(artist.getId());
+
+        starred2 = subsonic.lists().getStarred2();
+        assertThat(starred2.getArtists()).hasSize(1);
+        assertThat(starred2.getArtists().get(0).getId()).isEqualTo(artist.getId());
+
+        subsonic.annotation().unstarArtistID3(artist.getId());
+
+        starred2 = subsonic.lists().getStarred2();
+        assertThat(starred2.getArtists()).hasSize(0);
     }
 
     public static void userFlow(SubsonicBaseContainer container, boolean supportsVideo) {

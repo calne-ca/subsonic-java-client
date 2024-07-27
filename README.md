@@ -17,85 +17,85 @@ Here's an overview of which operations this client currently supports.
 Note that depending on the implementation some servers may not support specific operations even it should be supported by the API version of the server.
 For example airsonic does not support any chat operations while subsonic does.
 
-|API                    |Operation                  |Supported|
-|-----------------------|---------------------------|---------|
-|System                 |**ping**                   |**yes**  |
-|                       |**getLicense**             |**yes**  |
-|Browsing               |**getMusicFolders**        |**yes**  |
-|                       |**getIndexes**             |**yes**  |
-|                       |**getMusicDirectory**      |**yes**  |
-|                       |**getGenres**              |**yes**  |
-|                       |**getArtists**             |**yes**  |
-|                       |**getArtist**              |**yes**  |
-|                       |**getAlbum**               |**yes**  |
-|                       |**getSong**                |**yes**  |
-|                       |getVideos                  |no       |
-|                       |getVideoInfo               |no       |
-|                       |getArtistInfo              |no       |
-|                       |getArtistInfo2             |no       |
-|                       |getAlbumInfo               |no       |
-|                       |getAlbumInfo2              |no       |
-|                       |getSimilarSongs            |no       |
-|                       |getSimilarSongs2           |no       |
-|                       |getTopSongs                |no       |
-|Album/song lists       |getAlbumList               |no       |
-|                       |getAlbumList2              |no       |
-|                       |getRandomSongs             |no       |
-|                       |getSongsByGenre            |no       |
-|                       |**getNowPlaying**          |**yes**  |
-|                       |getStarred                 |no       |
-|                       |getStarred2                |no       |
-|Searching              |search                     |no       |
-|                       |**search2**                |**yes**  |
-|                       |**search3**                |**yes**  |
-|Playlists              |**getPlaylists**           |**yes**  |
-|                       |**getPlaylist**            |**yes**  |
-|                       |**createPlaylist**         |**yes**  |
-|                       |**updatePlaylist**         |**yes**  |
-|                       |**deletePlaylist**         |**yes**  |
-|Media retrieval        |**stream**                 |**yes**  |
-|                       |**download**               |**yes**  |
-|                       |hls                        |no       |
-|                       |getCaptions                |no       |
-|                       |**getCoverArt**            |**yes**  |
-|                       |getLyrics                  |no       |
-|                       |**getAvatar**              |**yes**  |
-|Media annotation       |star                       |no       |
-|                       |unstar                     |no       |
-|                       |setRating                  |no       |
-|                       |**scrobble**               |**yes**  |
-|Sharing                |getShares                  |no       |
-|                       |createShare                |no       |
-|                       |updateShare                |no       |
-|                       |deleteShare                |no       |
-|Podcasts               |getPodcasts                |no       |
-|                       |getNewestPodcasts          |no       |
-|                       |refreshPodcasts            |no       |
-|                       |createPodcastChannel       |no       |
-|                       |deletePodcastChannel       |no       |
-|                       |deletePodcastEpisode       |no       |
-|                       |downloadPodcastEpisode     |no       |
-|Jukebox                |jukeboxControl             |no       |
-|Internet radio         |getInternetRadioStations   |no       |
-|                       |createInternetRadioStation |no       |
-|                       |createInternetRadioStation |no       |
-|                       |updateInternetRadioStation |no       |
-|                       |deleteInternetRadioStation |no       |
-|Chat                   |getChatMessages            |no       |
-|                       |addChatMessage             |no       |
-|User management        |**getUser**                |**yes**  |
-|                       |**getUsers**               |**yes**  |
-|                       |**createUser**             |**yes**  |
-|                       |**updateUser**             |**yes**  |
-|                       |**deleteUser**             |**yes**  |
-|                       |**changePassword**         |**yes**  |
-|Bookmarks              |getBookmarks               |no       |
-|                       |createBookmark             |no       |
-|                       |deleteBookmark             |no       |
-|                       |getPlayQueue               |no       |
-|                       |savePlayQueue              |no       |
-|Media library scanning |**getScanStatus**          |**yes**  |
-|                       |**startScan**              |**yes**  |
+| API                    | Operation                  | Supported |
+|------------------------|----------------------------|-----------|
+| System                 | **ping**                   | **yes**   |
+|                        | **getLicense**             | **yes**   |
+| Browsing               | **getMusicFolders**        | **yes**   |
+|                        | **getIndexes**             | **yes**   |
+|                        | **getMusicDirectory**      | **yes**   |
+|                        | **getGenres**              | **yes**   |
+|                        | **getArtists**             | **yes**   |
+|                        | **getArtist**              | **yes**   |
+|                        | **getAlbum**               | **yes**   |
+|                        | **getSong**                | **yes**   |
+|                        | getVideos                  | no        |
+|                        | getVideoInfo               | no        |
+|                        | getArtistInfo              | no        |
+|                        | getArtistInfo2             | no        |
+|                        | getAlbumInfo               | no        |
+|                        | getAlbumInfo2              | no        |
+|                        | getSimilarSongs            | no        |
+|                        | getSimilarSongs2           | no        |
+|                        | getTopSongs                | no        |
+| Album/song lists       | getAlbumList               | no        |
+|                        | getAlbumList2              | no        |
+|                        | getRandomSongs             | no        |
+|                        | getSongsByGenre            | no        |
+|                        | **getNowPlaying**          | **yes**   |
+|                        | **getStarred**             | **yes**   |
+|                        | **getStarred2**            | **yes**   |
+| Searching              | search                     | no        |
+|                        | **search2**                | **yes**   |
+|                        | **search3**                | **yes**   |
+| Playlists              | **getPlaylists**           | **yes**   |
+|                        | **getPlaylist**            | **yes**   |
+|                        | **createPlaylist**         | **yes**   |
+|                        | **updatePlaylist**         | **yes**   |
+|                        | **deletePlaylist**         | **yes**   |
+| Media retrieval        | **stream**                 | **yes**   |
+|                        | **download**               | **yes**   |
+|                        | hls                        | no        |
+|                        | getCaptions                | no        |
+|                        | **getCoverArt**            | **yes**   |
+|                        | getLyrics                  | no        |
+|                        | **getAvatar**              | **yes**   |
+| Media annotation       | **star**                   | **yes**   |
+|                        | **unstar**                 | **yes**   |
+|                        | setRating                  | no        |
+|                        | **scrobble**               | **yes**   |
+| Sharing                | getShares                  | no        |
+|                        | createShare                | no        |
+|                        | updateShare                | no        |
+|                        | deleteShare                | no        |
+| Podcasts               | getPodcasts                | no        |
+|                        | getNewestPodcasts          | no        |
+|                        | refreshPodcasts            | no        |
+|                        | createPodcastChannel       | no        |
+|                        | deletePodcastChannel       | no        |
+|                        | deletePodcastEpisode       | no        |
+|                        | downloadPodcastEpisode     | no        |
+| Jukebox                | jukeboxControl             | no        |
+| Internet radio         | getInternetRadioStations   | no        |
+|                        | createInternetRadioStation | no        |
+|                        | createInternetRadioStation | no        |
+|                        | updateInternetRadioStation | no        |
+|                        | deleteInternetRadioStation | no        |
+| Chat                   | getChatMessages            | no        |
+|                        | addChatMessage             | no        |
+| User management        | **getUser**                | **yes**   |
+|                        | **getUsers**               | **yes**   |
+|                        | **createUser**             | **yes**   |
+|                        | **updateUser**             | **yes**   |
+|                        | **deleteUser**             | **yes**   |
+|                        | **changePassword**         | **yes**   |
+| Bookmarks              | getBookmarks               | no        |
+|                        | createBookmark             | no        |
+|                        | deleteBookmark             | no        |
+|                        | getPlayQueue               | no        |
+|                        | savePlayQueue              | no        |
+| Media library scanning | **getScanStatus**          | **yes**   |
+|                        | **startScan**              | **yes**   |
 
 ## Usage
 ### Initialization

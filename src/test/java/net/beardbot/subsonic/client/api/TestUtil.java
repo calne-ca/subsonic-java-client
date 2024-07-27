@@ -107,6 +107,34 @@ public class TestUtil {
         return nowPlayingResponse;
     }
 
+    public static SubsonicResponse starredResponse(){
+        var starred = new Starred();
+        starred.getAlbums().add(album());
+        starred.getArtists().add(artist());
+        starred.getSongs().add(song());
+
+        var starredResponse = new SubsonicResponse();
+        starredResponse.setStarred(starred);
+        starredResponse.setStatus(ResponseStatus.OK);
+        starredResponse.setVersion("1.15.0");
+
+        return starredResponse;
+    }
+
+    public static SubsonicResponse starred2Response(){
+        var starred2 = new Starred2();
+        starred2.getAlbums().add(albumID3());
+        starred2.getArtists().add(artistID3());
+        starred2.getSongs().add(song());
+
+        var starred2Response = new SubsonicResponse();
+        starred2Response.setStarred2(starred2);
+        starred2Response.setStatus(ResponseStatus.OK);
+        starred2Response.setVersion("1.15.0");
+
+        return starred2Response;
+    }
+
     public static SubsonicResponse scanStatusResponse(){
         var response = new SubsonicResponse();
         response.setScanStatus(scanStatus());

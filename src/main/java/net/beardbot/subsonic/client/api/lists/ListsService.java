@@ -20,15 +20,12 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.beardbot.subsonic.client.Subsonic;
-import net.beardbot.subsonic.client.api.playlist.UpdatePlaylistParams;
 import net.beardbot.subsonic.client.base.SubsonicClient;
 import org.subsonic.restapi.NowPlayingEntry;
-import org.subsonic.restapi.Playlist;
-import org.subsonic.restapi.PlaylistWithSongs;
+import org.subsonic.restapi.Starred;
+import org.subsonic.restapi.Starred2;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static net.beardbot.subsonic.client.utils.SubsonicResponseErrorHandler.handleError;
 
@@ -48,5 +45,23 @@ public class ListsService {
         handleError(response);
 
         return response.getNowPlaying().getEntries();
+    }
+
+    public Starred getStarred(){
+        log.debug("Fetching starred.");
+
+        var response = listsClient.getStarred();
+        handleError(response);
+
+        return response.getStarred();
+    }
+
+    public Starred2 getStarred2(){
+        log.debug("Fetching starred2.");
+
+        var response = listsClient.getStarred2();
+        handleError(response);
+
+        return response.getStarred2();
     }
 }

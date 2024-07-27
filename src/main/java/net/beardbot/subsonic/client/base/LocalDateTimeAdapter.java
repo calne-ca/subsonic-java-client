@@ -22,16 +22,15 @@ import java.time.format.DateTimeFormatter;
 
 public class LocalDateTimeAdapter extends XmlAdapter<String, LocalDateTime> {
  
-    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME;
  
     @Override
     public String marshal(LocalDateTime dateTime) {
-        return dateTime.format(dateFormat);
+        return dateTime.format(dateTimeFormatter);
     }
  
     @Override
     public LocalDateTime unmarshal(String dateTime) {
-        return LocalDateTime.parse(dateTime, dateFormat);
+        return LocalDateTime.parse(dateTime, dateTimeFormatter);
     }
- 
 }

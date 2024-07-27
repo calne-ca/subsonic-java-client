@@ -24,7 +24,6 @@ import ru.lanwen.wiremock.ext.WiremockUriResolver;
 import ru.lanwen.wiremock.ext.WiremockUriResolver.WiremockUri;
 
 import static net.beardbot.subsonic.client.api.TestUtil.subsonic;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith({
         WiremockResolver.class,
@@ -35,5 +34,19 @@ public class AnnotationsApiTest {
     @Test
     void scrobble(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
         subsonic(uri).annotation().scrobble("1", System.currentTimeMillis());
+    }
+
+    @Test
+    void star(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
+        subsonic(uri).annotation().star("1");
+        subsonic(uri).annotation().starAlbumID3("1");
+        subsonic(uri).annotation().starArtistID3("1");
+    }
+
+    @Test
+    void unstar(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
+        subsonic(uri).annotation().unstar("1");
+        subsonic(uri).annotation().unstarAlbumID3("1");
+        subsonic(uri).annotation().unstarArtistID3("1");
     }
 }

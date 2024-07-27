@@ -22,4 +22,10 @@ import org.subsonic.restapi.SubsonicResponse;
 public interface ListsClient {
     @RequestLine("GET /rest/getNowPlaying")
     SubsonicResponse getNowPlaying();
+
+    @RequestLine("GET /rest/getStarred")
+    SubsonicResponse getStarred();
+
+    @RequestLine("GET /rest/getStarred2")
+    SubsonicResponse getStarred2();
 }

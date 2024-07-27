@@ -58,4 +58,46 @@ class ListsServiceTest {
 
         assertSubsonicError(()->listsService.getNowPlaying(), error);
     }
+
+    @Test
+    void getStarred() {
+        var response = starredResponse();
+
+        when(listsClient.getStarred()).thenReturn(response);
+
+        var starred = listsService.getStarred();
+        assertThat(starred).isEqualTo(response.getStarred());
+    }
+
+    @Test
+    void getStarred_error() {
+        var error = subsonicError();
+        var errorResponse = subsonicResponse();
+        errorResponse.setError(error);
+
+        when(listsClient.getStarred()).thenReturn(errorResponse);
+
+        assertSubsonicError(()->listsService.getStarred(), error);
+    }
+
+    @Test
+    void getStarred2() {
+        var response = starred2Response();
+
+        when(listsClient.getStarred2()).thenReturn(response);
+
+        var starred2 = listsService.getStarred2();
+        assertThat(starred2).isEqualTo(response.getStarred2());
+    }
+
+    @Test
+    void getStarred2_error() {
+        var error = subsonicError();
+        var errorResponse = subsonicResponse();
+        errorResponse.setError(error);
+
+        when(listsClient.getStarred2()).thenReturn(errorResponse);
+
+        assertSubsonicError(()->listsService.getStarred2(), error);
+    }
 }

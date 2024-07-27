@@ -23,7 +23,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static net.beardbot.subsonic.client.api.TestUtil.*;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -74,5 +73,61 @@ class AnnotationsServiceTest {
 
         when(annotationClient.scrobble("1", false)).thenReturn(errorResponse);
         assertSubsonicError(()->annotationService.scrobbleNowPlaying("1"), error);
+    }
+
+    @Test
+    void star() {
+        when(annotationClient.starById("1")).thenReturn(subsonicResponse());
+        annotationService.star("1");
+
+        when(annotationClient.starByAlbumId("1")).thenReturn(subsonicResponse());
+        annotationService.starAlbumID3("1");
+
+        when(annotationClient.starByArtistId("1")).thenReturn(subsonicResponse());
+        annotationService.starArtistID3("1");
+    }
+
+    @Test
+    void star_error() {
+        var error = subsonicError();
+        var errorResponse = subsonicResponse();
+        errorResponse.setError(error);
+
+        when(annotationClient.starById("1")).thenReturn(errorResponse);
+        assertSubsonicError(()->annotationService.star("1"), error);
+
+        when(annotationClient.starByAlbumId("1")).thenReturn(errorResponse);
+        assertSubsonicError(()->annotationService.starAlbumID3("1"), error);
+
+        when(annotationClient.starByArtistId("1")).thenReturn(errorResponse);
+        assertSubsonicError(()->annotationService.starArtistID3("1"), error);
+    }
+
+    @Test
+    void unstar() {
+        when(annotationClient.unstarById("1")).thenReturn(subsonicResponse());
+        annotationService.unstar("1");
+
+        when(annotationClient.unstarByAlbumId("1")).thenReturn(subsonicResponse());
+        annotationService.unstarAlbumID3("1");
+
+        when(annotationClient.unstarByArtistId("1")).thenReturn(subsonicResponse());
+        annotationService.unstarArtistID3("1");
+    }
+
+    @Test
+    void unstar_error() {
+        var error = subsonicError();
+        var errorResponse = subsonicResponse();
+        errorResponse.setError(error);
+
+        when(annotationClient.unstarById("1")).thenReturn(errorResponse);
+        assertSubsonicError(()->annotationService.unstar("1"), error);
+
+        when(annotationClient.unstarByAlbumId("1")).thenReturn(errorResponse);
+        assertSubsonicError(()->annotationService.unstarAlbumID3("1"), error);
+
+        when(annotationClient.unstarByArtistId("1")).thenReturn(errorResponse);
+        assertSubsonicError(()->annotationService.unstarArtistID3("1"), error);
     }
 }

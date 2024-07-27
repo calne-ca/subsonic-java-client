@@ -26,4 +26,22 @@ public interface AnnotationClient {
 
     @RequestLine("GET /rest/scrobble?id={id}&submission={submission}&time={time}")
     SubsonicResponse scrobble(@Param("id") String id, @Param("submission") boolean submission, @Param("time") long timeInMillis);
+
+    @RequestLine("GET /rest/star?id={id}")
+    SubsonicResponse starById(@Param("id") String id);
+
+    @RequestLine("GET /rest/star?albumId={albumId}")
+    SubsonicResponse starByAlbumId(@Param("albumId") String albumId);
+
+    @RequestLine("GET /rest/star?artistId={artistId}")
+    SubsonicResponse starByArtistId(@Param("artistId") String artistId);
+
+    @RequestLine("GET /rest/unstar?id={id}")
+    SubsonicResponse unstarById(@Param("id") String id);
+
+    @RequestLine("GET /rest/unstar?albumId={albumId}")
+    SubsonicResponse unstarByAlbumId(@Param("albumId") String albumId);
+
+    @RequestLine("GET /rest/unstar?artistId={artistId}")
+    SubsonicResponse unstarByArtistId(@Param("artistId") String artistId);
 }

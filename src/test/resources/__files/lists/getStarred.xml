@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subsonic-response
+        xmlns="http://subsonic.org/restapi" status="ok" version="1.15.0">
+    <starred>
+        <artist name="Artist 1" id="10001" starred="2012-04-05T18:40:08"/>
+        <artist name="Artist 2" id="10002" starred="2024-07-18T22:20:25.220976486Z"/>
+        <album id="11001" parent="13001" title="Album 1 Title" album="Album 1" artist="Album 1 Artist" isDir="true" coverArt="15001" created="2011-02-26T10:45:30" starred="2024-07-18T22:20:25.220976486Z"/>
+        <album id="11002" parent="13002" title="Album 2 Title" album="Album 2" artist="Album 2 Artist" isDir="false" created="2024-07-18T22:20:25.220976486Z" starred="2012-04-05T18:40:02"/>
+        <song id="12001" parent="14001" title="Song 1" album="Song 1 Album" artist="Song 1 Artist" isDir="false" coverArt="16001" created="2010-09-27T20:52:23" starred="2024-07-18T22:20:25.220976486Z" duration="302" bitRate="320" track="2" year="2010" genre="Song 1 Genre" size="12087601" suffix="mp3" contentType="audio/mpeg" isVideo="false" path="test/song1.mp3" albumId="20001" artistId="21001" type="music"/>
+        <song id="12002" parent="14002" title="Song 2" album="Song 2 Album" artist="Song 2 Artist" isDir="false" coverArt="10002" created="2024-07-18T22:20:25.220976486Z" starred="2012-04-02T14:12:54" duration="521" bitRate="320" track="1" year="2010" genre="Song 2 Genre" size="21855635" suffix="mp3" contentType="audio/mpeg" isVideo="false" path="test/song2.mp3" albumId="20002" artistId="21002" type="music"/>
+    </starred>
+</subsonic-response>
