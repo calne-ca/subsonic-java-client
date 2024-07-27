@@ -3,6 +3,14 @@
 
 A Java Client for the [Subsonic API](http://www.subsonic.org/pages/api.jsp).
 
+```xml
+<dependency>
+    <groupId>net.beardbot</groupId>
+    <artifactId>subsonic-client</artifactId>
+    <version>0.4.0</version>
+</dependency>
+```
+
 ## Compatibility
 The client is based on the Subsonic API version 1.15.0.
 The used API version will automatically be adapted to match the server's API version if the server uses an older API version than 1.15.0.
