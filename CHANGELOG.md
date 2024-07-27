@@ -15,7 +15,8 @@
 
 ### Fixed
 
-- Fixed incompatibility with time-zoned date time strings in created/starred fields
+- Incompatibility with time-zoned date time strings in created/starred fields
+- Possible XXE vulnerability in media API operations
 
 ## [0.3.0] - 2021-09-26
 

@@ -33,9 +33,24 @@ import java.io.InputStream;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class JaxbUtil {
 
+    private static final XMLInputFactory inputFactory = createInputFactory();
+    private static final Unmarshaller unmarshaller = createUnmarshaller();
+
     @SneakyThrows
     public static <T> T unmarshall(InputStream xmlStream, Class<T> clazz){
-        Unmarshaller unmarshaller = JAXBContext.newInstance(ObjectFactory.class).createUnmarshaller();
-        return (T) unmarshaller.unmarshal(xmlStream);
+        var reader = inputFactory.createXMLStreamReader(xmlStream);
+        return (T) unmarshaller.unmarshal(reader);
+    }
+
+    private static XMLInputFactory createInputFactory() {
+        var xif = XMLInputFactory.newFactory();
+        xif.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
+        xif.setProperty(XMLInputFactory.SUPPORT_DTD, false);
+        return xif;
+    }
+
+    @SneakyThrows
+    private static Unmarshaller createUnmarshaller() {
+        return JAXBContext.newInstance(ObjectFactory.class).createUnmarshaller();
     }
 }
