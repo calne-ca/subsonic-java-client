@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "urlPath": "/rest/star",
+    "urlPath": "/rest/setRating",
     "queryParameters" : {
       "u" : {
         "equalTo" : "testUser"
@@ -23,6 +23,9 @@
       },
       "id" : {
         "equalTo" : "1"
+      },
+      "rating" : {
+        "equalTo" : "3"
       }
     }
   },

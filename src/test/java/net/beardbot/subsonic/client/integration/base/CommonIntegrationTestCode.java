@@ -268,6 +268,10 @@ public class CommonIntegrationTestCode {
 
         starred2 = subsonic.lists().getStarred2();
         assertThat(starred2.getArtists()).hasSize(0);
+
+        subsonic.annotation().setRating(song.getId(), 3);
+        song = subsonic.searching().search3("2 seconds").getSongs().get(0);
+        assertThat(song.getUserRating()).isEqualTo(3);
     }
 
     public static void userFlow(SubsonicBaseContainer container, boolean supportsVideo) {

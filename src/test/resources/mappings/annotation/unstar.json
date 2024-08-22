@@ -28,7 +28,7 @@
   },
   "response": {
     "status": 200,
-    "bodyFileName": "annotation/scrobble.xml",
+    "bodyFileName": "empty.xml",
     "headers": {
       "Content-Type": "text/xml;charset=UTF-8"
     }
