@@ -116,6 +116,22 @@ public class BrowsingService {
         return response.getSong();
     }
 
+    public ArtistInfo getArtistInfo(String id){
+        return getArtistInfo(id, ArtistInfoParams.create().count(20).includeNotPresent(false));
+    }
+
+    public ArtistInfo getArtistInfo(String id, ArtistInfoParams artistInfoParams){
+        log.debug("Fetching artist info for id '{}' and params {}.", id, artistInfoParams.getParamMapForLogging());
+
+        var params = artistInfoParams.getParamMap();
+        params.put("id", List.of(id));
+
+        var response = browsingClient.getArtistInfo(params);
+        handleError(response);
+
+        return response.getArtistInfo();
+    }
+
     public ArtistInfo2 getArtistInfo2(String id){
         return getArtistInfo2(id, ArtistInfoParams.create().count(20).includeNotPresent(false));
     }

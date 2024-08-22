@@ -202,6 +202,25 @@ public class BrowsingApiTest {
     }
 
     @Test
+    void getArtistInfo(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
+        var artistInfo = subsonic(uri).browsing().getArtistInfo("1");
+        assertThat(artistInfo.getBiography()).isEqualTo("bio1");
+        assertThat(artistInfo.getLargeImageUrl()).isEqualTo("http://localhost/large");
+        assertThat(artistInfo.getSmallImageUrl()).isEqualTo("http://localhost/small");
+        assertThat(artistInfo.getMediumImageUrl()).isEqualTo("http://localhost/medium");
+        assertThat(artistInfo.getLastFmUrl()).isEqualTo("http://localhost/lastfm");
+        assertThat(artistInfo.getMusicBrainzId()).isEqualTo("brainz1");
+        assertThat(artistInfo.getSimilarArtists()).hasSize(2);
+
+        var similarArtists = artistInfo.getSimilarArtists();
+        assertThat(similarArtists.get(0).getId()).isEqualTo("sa1-id");
+        assertThat(similarArtists.get(0).getName()).isEqualTo("sa1-name");
+        assertThat(similarArtists.get(0).getAverageRating()).isEqualTo(3.5);
+        assertThat(similarArtists.get(0).getUserRating()).isEqualTo(3);
+        assertThat(similarArtists.get(0).getStarred()).isEqualTo("2018-05-20T15:02:36.000");
+    }
+
+    @Test
     void getArtistInfo2(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
         var artistInfo2 = subsonic(uri).browsing().getArtistInfo2("1");
         assertThat(artistInfo2.getBiography()).isEqualTo("bio1");

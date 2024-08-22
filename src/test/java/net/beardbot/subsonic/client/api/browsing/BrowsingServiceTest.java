@@ -235,6 +235,73 @@ class BrowsingServiceTest {
     }
 
     @Test
+    void getArtistInfo() {
+        var artistInfoResponse = artistInfoResponse();
+
+        when(browsingClient.getArtistInfo(Map.of(
+                "id", List.of("1"),
+                "count", List.of("20"),
+                "includeNotPresent", List.of("false")
+        ))).thenReturn(artistInfoResponse);
+
+        var result = browsingService.getArtistInfo("1");
+        assertThat(result).isEqualTo(artistInfoResponse.getArtistInfo());
+    }
+
+    @Test
+    void getArtistInfo_withCountParam() {
+        var artistInfoResponse = artistInfoResponse();
+
+        when(browsingClient.getArtistInfo(Map.of(
+                "id", List.of("1"),
+                "count", List.of("15"),
+                "includeNotPresent", List.of("false")
+        ))).thenReturn(artistInfoResponse);
+
+        var result = browsingService.getArtistInfo("1", ArtistInfoParams.create().count(15));
+        assertThat(result).isEqualTo(artistInfoResponse.getArtistInfo());
+    }
+
+    @Test
+    void getArtistInfo_withIncludeNotPresentParam() {
+        var artistInfoResponse = artistInfoResponse();
+
+        when(browsingClient.getArtistInfo(Map.of(
+                "id", List.of("1"),
+                "count", List.of("20"),
+                "includeNotPresent", List.of("true")
+        ))).thenReturn(artistInfoResponse);
+
+        var result = browsingService.getArtistInfo("1", ArtistInfoParams.create().includeNotPresent(true));
+        assertThat(result).isEqualTo(artistInfoResponse.getArtistInfo());
+    }
+
+    @Test
+    void getArtistInfo_withAllParams() {
+        var artistInfoResponse = artistInfoResponse();
+
+        when(browsingClient.getArtistInfo(Map.of(
+                "id", List.of("1"),
+                "count", List.of("15"),
+                "includeNotPresent", List.of("true")
+        ))).thenReturn(artistInfoResponse);
+
+        var result = browsingService.getArtistInfo("1", ArtistInfoParams.create().count(15).includeNotPresent(true));
+        assertThat(result).isEqualTo(artistInfoResponse.getArtistInfo());
+    }
+
+    @Test
+    void getArtistInfo_error() {
+        var error = subsonicError();
+        var artistInfoResponse = artistInfoResponse();
+        artistInfoResponse.setError(error);
+
+        when(browsingClient.getArtistInfo(anyMap())).thenReturn(artistInfoResponse);
+
+        assertSubsonicError(()->browsingService.getArtistInfo("1"), error);
+    }
+
+    @Test
     void getArtistInfo2() {
         var artistInfo2Response = artistInfo2Response();
 

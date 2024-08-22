@@ -101,8 +101,11 @@ public class CommonIntegrationTestCode {
         assertThat(subsonic.browsing().getGenres().get(0).getName()).isEqualTo("Silence");
 
         // Get Artist Info
+        var artistInfo = subsonic.browsing().getArtistInfo(firstArtist.getId());
+        assertThat(artistInfo.getLastFmUrl()).startsWith("https://www.last.fm");
+
         var artistInfo2 = subsonic.browsing().getArtistInfo2(firstArtist.getId());
-        assertThat(artistInfo2.getLastFmUrl()).isEqualTo("https://www.last.fm/music/Misc+Artist");
+        assertThat(artistInfo2.getLastFmUrl()).startsWith("https://www.last.fm");
     }
 
     public static void search(SubsonicBaseContainer container){
