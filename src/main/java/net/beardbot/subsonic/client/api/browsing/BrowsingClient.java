@@ -55,4 +55,10 @@ public interface BrowsingClient {
 
     @RequestLine("GET /rest/getArtistInfo2")
     SubsonicResponse getArtistInfo2(@QueryMap Map<String,List<String>> params);
+
+    @RequestLine("GET /rest/getAlbumInfo?id={id}")
+    SubsonicResponse getAlbumInfo(@Param("id") String id);
+
+    @RequestLine("GET /rest/getAlbumInfo2?id={id}")
+    SubsonicResponse getAlbumInfo2(@Param("id") String id);
 }

@@ -1,0 +1,10 @@
+<subsonic-response xmlns="http://subsonic.org/restapi" status="ok" version="1.15.0">
+    <albumInfo>
+        <notes>notes1</notes>
+        <musicBrainzId>brainz1</musicBrainzId>
+        <lastFmUrl>http://localhost/lastfm</lastFmUrl>
+        <smallImageUrl>http://localhost/small</smallImageUrl>
+        <mediumImageUrl>http://localhost/medium</mediumImageUrl>
+        <largeImageUrl>http://localhost/large</largeImageUrl>
+    </albumInfo>
+</subsonic-response>

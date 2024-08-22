@@ -147,4 +147,22 @@ public class BrowsingService {
 
         return response.getArtistInfo2();
     }
+
+    public AlbumInfo getAlbumInfo(String id){
+        log.debug("Fetching album info for id '{}'.", id);
+
+        var response = browsingClient.getAlbumInfo(id);
+        handleError(response);
+
+        return response.getAlbumInfo();
+    }
+
+    public AlbumInfo getAlbumInfo2(String id){
+        log.debug("Fetching album info for id '{}'.", id);
+
+        var response = browsingClient.getAlbumInfo2(id);
+        handleError(response);
+
+        return response.getAlbumInfo();
+    }
 }

@@ -238,4 +238,26 @@ public class BrowsingApiTest {
         assertThat(similarArtists.get(0).getAlbumCount()).isEqualTo(3);
         assertThat(similarArtists.get(0).getStarred()).isEqualTo("2018-05-20T15:02:36.000");
     }
+
+    @Test
+    void getAlbumInfo(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
+        var albumInfo = subsonic(uri).browsing().getAlbumInfo("1");
+        assertThat(albumInfo.getNotes()).isEqualTo("notes1");
+        assertThat(albumInfo.getLargeImageUrl()).isEqualTo("http://localhost/large");
+        assertThat(albumInfo.getSmallImageUrl()).isEqualTo("http://localhost/small");
+        assertThat(albumInfo.getMediumImageUrl()).isEqualTo("http://localhost/medium");
+        assertThat(albumInfo.getLastFmUrl()).isEqualTo("http://localhost/lastfm");
+        assertThat(albumInfo.getMusicBrainzId()).isEqualTo("brainz1");
+    }
+
+    @Test
+    void getAlbumInfo2(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
+        var albumInfo = subsonic(uri).browsing().getAlbumInfo2("1");
+        assertThat(albumInfo.getNotes()).isEqualTo("notes1");
+        assertThat(albumInfo.getLargeImageUrl()).isEqualTo("http://localhost/large");
+        assertThat(albumInfo.getSmallImageUrl()).isEqualTo("http://localhost/small");
+        assertThat(albumInfo.getMediumImageUrl()).isEqualTo("http://localhost/medium");
+        assertThat(albumInfo.getLastFmUrl()).isEqualTo("http://localhost/lastfm");
+        assertThat(albumInfo.getMusicBrainzId()).isEqualTo("brainz1");
+    }
 }

@@ -320,6 +320,15 @@ public class TestUtil {
         return response;
     }
 
+    public static SubsonicResponse albumInfoResponse(){
+        var response = new SubsonicResponse();
+        response.setStatus(ResponseStatus.OK);
+        response.setVersion("1.15.0");
+        response.setAlbumInfo(albumInfo());
+
+        return response;
+    }
+
     public static SubsonicResponse indexesResponse(){
         var indexes = new Indexes();
         indexes.getIndices().addAll(Collections.singletonList(index()));
@@ -437,5 +446,16 @@ public class TestUtil {
         artistInfo2.setMusicBrainzId("brainz");
         artistInfo2.getSimilarArtists().add(artistID3());
         return artistInfo2;
+    }
+
+    public static AlbumInfo albumInfo(){
+        var albumInfo = new AlbumInfo();
+        albumInfo.setNotes("abc");
+        albumInfo.setSmallImageUrl("http://localhost/small");
+        albumInfo.setMediumImageUrl("http://localhost/medium");
+        albumInfo.setLargeImageUrl("http://localhost/large");
+        albumInfo.setLastFmUrl("http://localhost/lastfm");
+        albumInfo.setMusicBrainzId("brainz");
+        return albumInfo;
     }
 }

@@ -367,4 +367,25 @@ class BrowsingServiceTest {
 
         assertSubsonicError(()->browsingService.getArtistInfo2("1"), error);
     }
+
+    @Test
+    void getAlbumInfo() {
+        var albumInfoResponse = albumInfoResponse();
+
+        when(browsingClient.getAlbumInfo("1")).thenReturn(albumInfoResponse);
+
+        var result = browsingService.getAlbumInfo("1");
+        assertThat(result).isEqualTo(albumInfoResponse.getAlbumInfo());
+    }
+
+    @Test
+    void getAlbumInfo_error() {
+        var error = subsonicError();
+        var albumInfoResponse = albumInfoResponse();
+        albumInfoResponse.setError(error);
+
+        when(browsingClient.getAlbumInfo("1")).thenReturn(albumInfoResponse);
+
+        assertSubsonicError(()->browsingService.getAlbumInfo("1"), error);
+    }
 }
