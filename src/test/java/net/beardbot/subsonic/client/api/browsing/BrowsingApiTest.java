@@ -200,4 +200,23 @@ public class BrowsingApiTest {
         assertThat(song.getArtistId()).isEqualTo("154");
         assertThat(song.getType()).isEqualTo(MediaType.MUSIC);
     }
+
+    @Test
+    void getArtistInfo2(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
+        var artistInfo2 = subsonic(uri).browsing().getArtistInfo2("1");
+        assertThat(artistInfo2.getBiography()).isEqualTo("bio1");
+        assertThat(artistInfo2.getLargeImageUrl()).isEqualTo("http://localhost/large");
+        assertThat(artistInfo2.getSmallImageUrl()).isEqualTo("http://localhost/small");
+        assertThat(artistInfo2.getMediumImageUrl()).isEqualTo("http://localhost/medium");
+        assertThat(artistInfo2.getLastFmUrl()).isEqualTo("http://localhost/lastfm");
+        assertThat(artistInfo2.getMusicBrainzId()).isEqualTo("brainz1");
+        assertThat(artistInfo2.getSimilarArtists()).hasSize(2);
+
+        var similarArtists = artistInfo2.getSimilarArtists();
+        assertThat(similarArtists.get(0).getId()).isEqualTo("sa1-id");
+        assertThat(similarArtists.get(0).getName()).isEqualTo("sa1-name");
+        assertThat(similarArtists.get(0).getCoverArtId()).isEqualTo("sa1-ca-id");
+        assertThat(similarArtists.get(0).getAlbumCount()).isEqualTo(3);
+        assertThat(similarArtists.get(0).getStarred()).isEqualTo("2018-05-20T15:02:36.000");
+    }
 }

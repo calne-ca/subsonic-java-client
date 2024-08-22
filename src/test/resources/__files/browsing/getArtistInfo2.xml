@@ -1,0 +1,12 @@
+<subsonic-response xmlns="http://subsonic.org/restapi" status="ok" version="1.15.0">
+    <artistInfo2>
+        <biography>bio1</biography>
+        <musicBrainzId>brainz1</musicBrainzId>
+        <lastFmUrl>http://localhost/lastfm</lastFmUrl>
+        <smallImageUrl>http://localhost/small</smallImageUrl>
+        <mediumImageUrl>http://localhost/medium</mediumImageUrl>
+        <largeImageUrl>http://localhost/large</largeImageUrl>
+        <similarArtist id="sa1-id" name="sa1-name" coverArt="sa1-ca-id" albumCount="3" starred="2018-05-20T15:02:36.000"/>
+        <similarArtist id="sa2-id" name="sa2-name" coverArt="sa2-ca-id" albumCount="4" starred="2018-05-20T15:02:36.000"/>
+    </artistInfo2>
+</subsonic-response>

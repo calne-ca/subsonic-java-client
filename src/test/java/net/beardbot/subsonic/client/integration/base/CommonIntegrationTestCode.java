@@ -99,6 +99,10 @@ public class CommonIntegrationTestCode {
 
         // Get Genres
         assertThat(subsonic.browsing().getGenres().get(0).getName()).isEqualTo("Silence");
+
+        // Get Artist Info
+        var artistInfo2 = subsonic.browsing().getArtistInfo2(firstArtist.getId());
+        assertThat(artistInfo2.getLastFmUrl()).isEqualTo("https://www.last.fm/music/Misc+Artist");
     }
 
     public static void search(SubsonicBaseContainer container){

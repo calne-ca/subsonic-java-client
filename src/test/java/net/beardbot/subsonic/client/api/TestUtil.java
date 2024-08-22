@@ -302,6 +302,15 @@ public class TestUtil {
         return response;
     }
 
+    public static SubsonicResponse artistInfo2Response(){
+        var response = new SubsonicResponse();
+        response.setStatus(ResponseStatus.OK);
+        response.setVersion("1.15.0");
+        response.setArtistInfo2(artistInfo2());
+
+        return response;
+    }
+
     public static SubsonicResponse indexesResponse(){
         var indexes = new Indexes();
         indexes.getIndices().addAll(Collections.singletonList(index()));
@@ -395,5 +404,17 @@ public class TestUtil {
         genre.setAlbumCount(1);
         genre.setSongCount(2);
         return genre;
+    }
+
+    public static ArtistInfo2 artistInfo2(){
+        var artistInfo2 = new ArtistInfo2();
+        artistInfo2.setBiography("abc");
+        artistInfo2.setSmallImageUrl("http://localhost/small");
+        artistInfo2.setMediumImageUrl("http://localhost/medium");
+        artistInfo2.setLargeImageUrl("http://localhost/large");
+        artistInfo2.setLastFmUrl("http://localhost/lastfm");
+        artistInfo2.setMusicBrainzId("brainz");
+        artistInfo2.getSimilarArtists().add(artistID3());
+        return artistInfo2;
     }
 }
