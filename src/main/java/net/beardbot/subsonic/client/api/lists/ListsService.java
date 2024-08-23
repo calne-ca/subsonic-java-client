@@ -21,9 +21,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.beardbot.subsonic.client.Subsonic;
 import net.beardbot.subsonic.client.base.SubsonicClient;
-import org.subsonic.restapi.NowPlayingEntry;
-import org.subsonic.restapi.Starred;
-import org.subsonic.restapi.Starred2;
+import org.subsonic.restapi.*;
 
 import java.util.List;
 
@@ -63,5 +61,31 @@ public class ListsService {
         handleError(response);
 
         return response.getStarred2();
+    }
+
+    public AlbumList getAlbumList(){
+        return getAlbumList(AlbumListParams.create());
+    }
+
+    public AlbumList getAlbumList(AlbumListParams albumListParams){
+        log.debug("Fetching album list with params {}", albumListParams.getParamMapForLogging());
+
+        var response = listsClient.getAlbumList(albumListParams.getParamMap());
+        handleError(response);
+
+        return response.getAlbumList();
+    }
+
+    public AlbumList2 getAlbumList2(){
+        return getAlbumList2(AlbumListParams.create());
+    }
+
+    public AlbumList2 getAlbumList2(AlbumListParams albumListParams){
+        log.debug("Fetching album list with params {}", albumListParams.getParamMapForLogging());
+
+        var response = listsClient.getAlbumList2(albumListParams.getParamMap());
+        handleError(response);
+
+        return response.getAlbumList2();
     }
 }

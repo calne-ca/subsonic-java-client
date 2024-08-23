@@ -63,6 +63,11 @@ public class AirsonicIntegrationTest {
     }
 
     @Test
+    public void lists() {
+        CommonIntegrationTestCode.lists(airsonicContainer);
+    }
+
+    @Test
     public void playlist() {
         CommonIntegrationTestCode.playlist(airsonicContainer);
     }

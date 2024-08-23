@@ -22,8 +22,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+import java.util.Map;
+
 import static net.beardbot.subsonic.client.api.TestUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -99,5 +103,101 @@ class ListsServiceTest {
         when(listsClient.getStarred2()).thenReturn(errorResponse);
 
         assertSubsonicError(()->listsService.getStarred2(), error);
+    }
+
+    @Test
+    void getAlbumList_defaultParams() {
+        var response = albumListResponse();
+
+        var expectedParams = Map.of(
+                "type", List.of(AlbumListType.RANDOM.getValue()),
+                "size", List.of("10"),
+                "offset", List.of("0"));
+
+        when(listsClient.getAlbumList(expectedParams)).thenReturn(response);
+
+        var albumList = listsService.getAlbumList();
+        assertThat(albumList).isEqualTo(response.getAlbumList());
+    }
+
+    @Test
+    void getAlbumList_allParams() {
+        var response = albumListResponse();
+
+        var expectedParams = Map.of(
+                "type", List.of(AlbumListType.BY_YEAR.getValue()),
+                "fromYear", List.of("2010"),
+                "toYear", List.of("2020"),
+                "musicFolderId", List.of("1"),
+                "genre", List.of("Rock"),
+                "size", List.of("20"),
+                "offset", List.of("2"));
+
+        when(listsClient.getAlbumList(expectedParams)).thenReturn(response);
+
+        var albumList = listsService.getAlbumList(AlbumListParams.create()
+                .offset(2).size(20).type(AlbumListType.BY_YEAR).fromYear(2010).toYear(2020).musicFolderId(1).genre("Rock")
+        );
+        assertThat(albumList).isEqualTo(response.getAlbumList());
+    }
+
+    @Test
+    void getAlbumList_error() {
+        var error = subsonicError();
+        var errorResponse = subsonicResponse();
+        errorResponse.setError(error);
+
+        when(listsClient.getAlbumList(anyMap())).thenReturn(errorResponse);
+
+        assertSubsonicError(()->listsService.getAlbumList(), error);
+        assertSubsonicError(()->listsService.getAlbumList(AlbumListParams.create()), error);
+    }
+
+    @Test
+    void getAlbumList2_defaultParams() {
+        var response = albumList2Response();
+
+        var expectedParams = Map.of(
+                "type", List.of(AlbumListType.RANDOM.getValue()),
+                "size", List.of("10"),
+                "offset", List.of("0"));
+
+        when(listsClient.getAlbumList2(expectedParams)).thenReturn(response);
+
+        var albumList = listsService.getAlbumList2();
+        assertThat(albumList).isEqualTo(response.getAlbumList2());
+    }
+
+    @Test
+    void getAlbumList2_allParams() {
+        var response = albumList2Response();
+
+        var expectedParams = Map.of(
+                "type", List.of(AlbumListType.BY_YEAR.getValue()),
+                "fromYear", List.of("2010"),
+                "toYear", List.of("2020"),
+                "musicFolderId", List.of("1"),
+                "genre", List.of("Rock"),
+                "size", List.of("20"),
+                "offset", List.of("2"));
+
+        when(listsClient.getAlbumList2(expectedParams)).thenReturn(response);
+
+        var albumList = listsService.getAlbumList2(AlbumListParams.create()
+                .offset(2).size(20).type(AlbumListType.BY_YEAR).fromYear(2010).toYear(2020).musicFolderId(1).genre("Rock")
+        );
+        assertThat(albumList).isEqualTo(response.getAlbumList2());
+    }
+
+    @Test
+    void getAlbumList2_error() {
+        var error = subsonicError();
+        var errorResponse = subsonicResponse();
+        errorResponse.setError(error);
+
+        when(listsClient.getAlbumList2(anyMap())).thenReturn(errorResponse);
+
+        assertSubsonicError(()->listsService.getAlbumList2(), error);
+        assertSubsonicError(()->listsService.getAlbumList2(AlbumListParams.create()), error);
     }
 }

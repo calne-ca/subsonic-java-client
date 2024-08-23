@@ -174,4 +174,65 @@ public class ListsApiTest {
         assertThat(starredSong1.getCreated().toString()).isEqualTo("2010-09-27T20:52:23");
         assertThat(starredSong1.getStarred().toString()).isEqualTo("2024-07-18T22:20:25.220976486");
     }
+
+    @Test
+    void getAlbumList(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
+        var albumList = subsonic(uri).lists().getAlbumList();
+
+        var albums = albumList.getAlbums();
+        assertThat(albums).hasSize(2);
+
+        assertThat(albums.get(0).getId()).isEqualTo("id1");
+        assertThat(albums.get(0).getAlbum()).isEqualTo("al1-name");
+        assertThat(albums.get(0).getAlbumId()).isEqualTo("al1-id");
+        assertThat(albums.get(0).getArtist()).isEqualTo("ar1-name");
+        assertThat(albums.get(0).getArtistId()).isEqualTo("ar1-id");
+        assertThat(albums.get(0).getType()).isEqualTo(MediaType.MUSIC);
+        assertThat(albums.get(0).getContentType()).isEqualTo("ct1");
+        assertThat(albums.get(0).getSuffix()).isEqualTo("suf1");
+        assertThat(albums.get(0).getUserRating()).isEqualTo(3);
+        assertThat(albums.get(0).getGenre()).isEqualTo("gen1");
+        assertThat(albums.get(0).getYear()).isEqualTo(1234);
+        assertThat(albums.get(0).getPath()).isEqualTo("path1");
+        assertThat(albums.get(0).getSize()).isEqualTo(1234);
+        assertThat(albums.get(0).getTrack()).isEqualTo(1234);
+        assertThat(albums.get(0).getBitRate()).isEqualTo(1234);
+        assertThat(albums.get(0).getDuration()).isEqualTo(1234);
+        assertThat(albums.get(0).getCreated()).isEqualTo("2018-07-17T17:48:07.000");
+        assertThat(albums.get(0).getCoverArtId()).isEqualTo("cov1");
+        assertThat(albums.get(0).getTitle()).isEqualTo("title1");
+        assertThat(albums.get(0).getParentId()).isEqualTo("parent1");
+        assertThat(albums.get(0).getStarred()).isEqualTo("2018-07-17T17:48:07.000");
+        assertThat(albums.get(0).getPlayCount()).isEqualTo(1234);
+        assertThat(albums.get(0).getTranscodedSuffix()).isEqualTo("tcs");
+        assertThat(albums.get(0).getTranscodedContentType()).isEqualTo("tcct");
+        assertThat(albums.get(0).getDiscNumber()).isEqualTo(1234);
+        assertThat(albums.get(0).getAverageRating()).isEqualTo(3.5);
+        assertThat(albums.get(0).getBookmarkPosition()).isEqualTo(1234);
+        assertThat(albums.get(0).getOriginalHeight()).isEqualTo(1234);
+        assertThat(albums.get(0).getOriginalWidth()).isEqualTo(1234);
+        assertThat(albums.get(0).isDir()).isTrue();
+        assertThat(albums.get(0).isVideo()).isFalse();
+    }
+
+    @Test
+    void getAlbumList2(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
+        var albumList = subsonic(uri).lists().getAlbumList2();
+
+        var albums = albumList.getAlbums();
+        assertThat(albums).hasSize(2);
+
+        assertThat(albums.get(0).getId()).isEqualTo("id1");
+        assertThat(albums.get(0).getName()).isEqualTo("al1-name");
+        assertThat(albums.get(0).getSongCount()).isEqualTo(1234);
+        assertThat(albums.get(0).getArtist()).isEqualTo("ar1-name");
+        assertThat(albums.get(0).getArtistId()).isEqualTo("ar1-id");
+        assertThat(albums.get(0).getGenre()).isEqualTo("gen1");
+        assertThat(albums.get(0).getYear()).isEqualTo(1234);
+        assertThat(albums.get(0).getDuration()).isEqualTo(1234);
+        assertThat(albums.get(0).getCreated()).isEqualTo("2018-07-17T17:48:07.000");
+        assertThat(albums.get(0).getCoverArtId()).isEqualTo("cov1");
+        assertThat(albums.get(0).getStarred()).isEqualTo("2018-07-17T17:48:07.000");
+        assertThat(albums.get(0).getPlayCount()).isEqualTo(1234);
+    }
 }

@@ -62,6 +62,11 @@ public class SubsonicIntegrationTest {
     }
 
     @Test
+    public void lists() {
+        CommonIntegrationTestCode.lists(subsonicContainer);
+    }
+
+    @Test
     public void playlist() {
         CommonIntegrationTestCode.playlist(subsonicContainer);
     }

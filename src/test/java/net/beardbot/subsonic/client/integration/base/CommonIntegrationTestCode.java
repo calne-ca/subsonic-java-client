@@ -132,6 +132,26 @@ public class CommonIntegrationTestCode {
         assertThat(song2.getTitle()).endsWith("Test Title 2");
     }
 
+    public static void lists(SubsonicBaseContainer container){
+        var subsonic = subsonic(container, "admin", "admin");
+
+        container.addMusicFolder("/misc");
+        container.addMusicFolder("/test");
+        scanLibrary(subsonic);
+
+        // Get Album List
+        var albums = subsonic.lists().getAlbumList().getAlbums();
+        assertThat(albums).hasSize(2);
+        assertThat(albums.get(0).getAlbum()).isIn("Misc Album", "Test Album");
+        assertThat(albums.get(1).getAlbum()).isIn("Misc Album", "Test Album");
+
+        // Get Album List 2
+        var albums2 = subsonic.lists().getAlbumList2().getAlbums();
+        assertThat(albums2).hasSize(2);
+        assertThat(albums2.get(0).getName()).isIn("Misc Album", "Test Album");
+        assertThat(albums2.get(1).getName()).isIn("Misc Album", "Test Album");
+    }
+
     public static void playlist(SubsonicBaseContainer container){
         var subsonic = subsonic(container, "admin", "admin");
 

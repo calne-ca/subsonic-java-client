@@ -16,8 +16,12 @@
  */
 package net.beardbot.subsonic.client.api.lists;
 
+import feign.QueryMap;
 import feign.RequestLine;
 import org.subsonic.restapi.SubsonicResponse;
+
+import java.util.List;
+import java.util.Map;
 
 public interface ListsClient {
     @RequestLine("GET /rest/getNowPlaying")
@@ -28,4 +32,10 @@ public interface ListsClient {
 
     @RequestLine("GET /rest/getStarred2")
     SubsonicResponse getStarred2();
+
+    @RequestLine("GET /rest/getAlbumList")
+    SubsonicResponse getAlbumList(@QueryMap Map<String, List<String>> params);
+
+    @RequestLine("GET /rest/getAlbumList2")
+    SubsonicResponse getAlbumList2(@QueryMap Map<String,List<String>> params);
 }

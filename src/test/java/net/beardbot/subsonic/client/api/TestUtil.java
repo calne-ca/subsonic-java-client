@@ -135,6 +135,30 @@ public class TestUtil {
         return starred2Response;
     }
 
+    public static SubsonicResponse albumListResponse(){
+        var albumList = new AlbumList();
+        albumList.getAlbums().add(album());
+
+        var response = new SubsonicResponse();
+        response.setAlbumList(albumList);
+        response.setStatus(ResponseStatus.OK);
+        response.setVersion("1.15.0");
+
+        return response;
+    }
+
+    public static SubsonicResponse albumList2Response(){
+        var albumList = new AlbumList2();
+        albumList.getAlbums().add(albumID3());
+
+        var response = new SubsonicResponse();
+        response.setAlbumList2(albumList);
+        response.setStatus(ResponseStatus.OK);
+        response.setVersion("1.15.0");
+
+        return response;
+    }
+
     public static SubsonicResponse scanStatusResponse(){
         var response = new SubsonicResponse();
         response.setScanStatus(scanStatus());
