@@ -95,4 +95,11 @@ public class AnnotationService {
         var response = annotationClient.unstarByArtistId(artistId);
         handleError(response);
     }
+
+    public void setRating(String id, int rating){
+        log.debug("Setting rating '{}' for item with id '{}'.", id, rating);
+
+        var response = annotationClient.setRating(id, rating);
+        handleError(response);
+    }
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subsonic-response xmlns="http://subsonic.org/restapi" status="ok" version="1.15.0">
+    <albumList>
+        <album id="id1" album="al1-name" albumId="al1-id" artist="ar1-name" artistId="ar1-id" type="music" contentType="ct1" suffix="suf1" userRating="3" genre="gen1" year="1234" path="path1" size="1234" track="1234" bitRate="1234" duration="1234" created="2018-07-17T17:48:07.000" coverArt="cov1" title="title1" parent="parent1" starred="2018-07-17T17:48:07.000" playCount="1234" transcodedSuffix="tcs" transcodedContentType="tcct" discNumber="1234" averageRating="3.5" bookmarkPosition="1234" originalHeight="1234" originalWidth="1234" isDir="true" isVideo="false"/>
+        <album id="id2" album="al2-name" albumId="al2-id" artist="ar2-name" artistId="ar2-id" type="music" contentType="ct2" suffix="suf2" userRating="3" genre="gen2" year="1234" path="path2" size="1234" track="1234" bitRate="1234" duration="1234" created="2018-07-17T17:48:07.000" coverArt="cov2" title="title2" parent="parent2" starred="2018-07-17T17:48:07.000" playCount="1234" transcodedSuffix="tcs" transcodedContentType="tcct" discNumber="1234" averageRating="3.5" bookmarkPosition="1234" originalHeight="1234" originalWidth="1234" isDir="true" isVideo="false"/>
+    </albumList>
+</subsonic-response>

@@ -32,12 +32,25 @@ public abstract class ApiParams {
     }
 
     public Map<String,List<String>> getParamMap(){
-        return new HashMap<>(paramMap);
+        var params = new HashMap<>(paramMap);
+        var defaultParams = defaultParams();
+
+        for (String key : defaultParams.keySet()) {
+            if(!params.containsKey(key)) {
+                params.put(key, defaultParams.get(key));
+            }
+        }
+
+        return params;
     }
 
     public Map<String,List<String>> getParamMapForLogging(){
         var params = getParamMap();
         secretParamNames.forEach(s->params.put(s,Collections.singletonList("*****")));
         return params;
+    }
+
+    protected Map<String,List<String>> defaultParams() {
+        return Collections.emptyMap();
     }
 }

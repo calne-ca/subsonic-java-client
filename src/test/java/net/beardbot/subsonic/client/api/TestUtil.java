@@ -135,6 +135,30 @@ public class TestUtil {
         return starred2Response;
     }
 
+    public static SubsonicResponse albumListResponse(){
+        var albumList = new AlbumList();
+        albumList.getAlbums().add(album());
+
+        var response = new SubsonicResponse();
+        response.setAlbumList(albumList);
+        response.setStatus(ResponseStatus.OK);
+        response.setVersion("1.15.0");
+
+        return response;
+    }
+
+    public static SubsonicResponse albumList2Response(){
+        var albumList = new AlbumList2();
+        albumList.getAlbums().add(albumID3());
+
+        var response = new SubsonicResponse();
+        response.setAlbumList2(albumList);
+        response.setStatus(ResponseStatus.OK);
+        response.setVersion("1.15.0");
+
+        return response;
+    }
+
     public static SubsonicResponse scanStatusResponse(){
         var response = new SubsonicResponse();
         response.setScanStatus(scanStatus());
@@ -302,6 +326,33 @@ public class TestUtil {
         return response;
     }
 
+    public static SubsonicResponse artistInfoResponse(){
+        var response = new SubsonicResponse();
+        response.setStatus(ResponseStatus.OK);
+        response.setVersion("1.15.0");
+        response.setArtistInfo(artistInfo());
+
+        return response;
+    }
+
+    public static SubsonicResponse artistInfo2Response(){
+        var response = new SubsonicResponse();
+        response.setStatus(ResponseStatus.OK);
+        response.setVersion("1.15.0");
+        response.setArtistInfo2(artistInfo2());
+
+        return response;
+    }
+
+    public static SubsonicResponse albumInfoResponse(){
+        var response = new SubsonicResponse();
+        response.setStatus(ResponseStatus.OK);
+        response.setVersion("1.15.0");
+        response.setAlbumInfo(albumInfo());
+
+        return response;
+    }
+
     public static SubsonicResponse indexesResponse(){
         var indexes = new Indexes();
         indexes.getIndices().addAll(Collections.singletonList(index()));
@@ -395,5 +446,40 @@ public class TestUtil {
         genre.setAlbumCount(1);
         genre.setSongCount(2);
         return genre;
+    }
+
+    public static ArtistInfo artistInfo(){
+        var artistInfo = new ArtistInfo();
+        artistInfo.setBiography("abc");
+        artistInfo.setSmallImageUrl("http://localhost/small");
+        artistInfo.setMediumImageUrl("http://localhost/medium");
+        artistInfo.setLargeImageUrl("http://localhost/large");
+        artistInfo.setLastFmUrl("http://localhost/lastfm");
+        artistInfo.setMusicBrainzId("brainz");
+        artistInfo.getSimilarArtists().add(artist());
+        return artistInfo;
+    }
+
+    public static ArtistInfo2 artistInfo2(){
+        var artistInfo2 = new ArtistInfo2();
+        artistInfo2.setBiography("abc");
+        artistInfo2.setSmallImageUrl("http://localhost/small");
+        artistInfo2.setMediumImageUrl("http://localhost/medium");
+        artistInfo2.setLargeImageUrl("http://localhost/large");
+        artistInfo2.setLastFmUrl("http://localhost/lastfm");
+        artistInfo2.setMusicBrainzId("brainz");
+        artistInfo2.getSimilarArtists().add(artistID3());
+        return artistInfo2;
+    }
+
+    public static AlbumInfo albumInfo(){
+        var albumInfo = new AlbumInfo();
+        albumInfo.setNotes("abc");
+        albumInfo.setSmallImageUrl("http://localhost/small");
+        albumInfo.setMediumImageUrl("http://localhost/medium");
+        albumInfo.setLargeImageUrl("http://localhost/large");
+        albumInfo.setLastFmUrl("http://localhost/lastfm");
+        albumInfo.setMusicBrainzId("brainz");
+        return albumInfo;
     }
 }

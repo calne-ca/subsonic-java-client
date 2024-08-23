@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subsonic-response xmlns="http://subsonic.org/restapi" status="ok" version="1.15.0">
+    <albumList2>
+        <album id="id1" name="al1-name" artist="ar1-name" artistId="ar1-id" genre="gen1" year="1234" duration="1234" created="2018-07-17T17:48:07.000" coverArt="cov1" starred="2018-07-17T17:48:07.000" playCount="1234" songCount="1234"/>
+        <album id="id2" name="al2-name" artist="ar2-name" artistId="ar2-id" genre="gen2" year="1234" duration="1234" created="2018-07-17T17:48:07.000" coverArt="cov2" starred="2018-07-17T17:48:07.000" playCount="1234" songCount="1234"/>
+    </albumList2>
+</subsonic-response>

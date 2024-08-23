@@ -23,11 +23,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import static net.beardbot.subsonic.client.api.TestUtil.*;
 import static net.beardbot.subsonic.client.api.TestUtil.songResponse;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.InstanceOfAssertFactories.LIST;
+import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -229,5 +232,160 @@ class BrowsingServiceTest {
         when(browsingClient.getSong("1")).thenReturn(songResponse);
 
         assertSubsonicError(()->browsingService.getSong("1"), error);
+    }
+
+    @Test
+    void getArtistInfo() {
+        var artistInfoResponse = artistInfoResponse();
+
+        when(browsingClient.getArtistInfo(Map.of(
+                "id", List.of("1"),
+                "count", List.of("20"),
+                "includeNotPresent", List.of("false")
+        ))).thenReturn(artistInfoResponse);
+
+        var result = browsingService.getArtistInfo("1");
+        assertThat(result).isEqualTo(artistInfoResponse.getArtistInfo());
+    }
+
+    @Test
+    void getArtistInfo_withCountParam() {
+        var artistInfoResponse = artistInfoResponse();
+
+        when(browsingClient.getArtistInfo(Map.of(
+                "id", List.of("1"),
+                "count", List.of("15"),
+                "includeNotPresent", List.of("false")
+        ))).thenReturn(artistInfoResponse);
+
+        var result = browsingService.getArtistInfo("1", ArtistInfoParams.create().count(15));
+        assertThat(result).isEqualTo(artistInfoResponse.getArtistInfo());
+    }
+
+    @Test
+    void getArtistInfo_withIncludeNotPresentParam() {
+        var artistInfoResponse = artistInfoResponse();
+
+        when(browsingClient.getArtistInfo(Map.of(
+                "id", List.of("1"),
+                "count", List.of("20"),
+                "includeNotPresent", List.of("true")
+        ))).thenReturn(artistInfoResponse);
+
+        var result = browsingService.getArtistInfo("1", ArtistInfoParams.create().includeNotPresent(true));
+        assertThat(result).isEqualTo(artistInfoResponse.getArtistInfo());
+    }
+
+    @Test
+    void getArtistInfo_withAllParams() {
+        var artistInfoResponse = artistInfoResponse();
+
+        when(browsingClient.getArtistInfo(Map.of(
+                "id", List.of("1"),
+                "count", List.of("15"),
+                "includeNotPresent", List.of("true")
+        ))).thenReturn(artistInfoResponse);
+
+        var result = browsingService.getArtistInfo("1", ArtistInfoParams.create().count(15).includeNotPresent(true));
+        assertThat(result).isEqualTo(artistInfoResponse.getArtistInfo());
+    }
+
+    @Test
+    void getArtistInfo_error() {
+        var error = subsonicError();
+        var artistInfoResponse = artistInfoResponse();
+        artistInfoResponse.setError(error);
+
+        when(browsingClient.getArtistInfo(anyMap())).thenReturn(artistInfoResponse);
+
+        assertSubsonicError(()->browsingService.getArtistInfo("1"), error);
+    }
+
+    @Test
+    void getArtistInfo2() {
+        var artistInfo2Response = artistInfo2Response();
+
+        when(browsingClient.getArtistInfo2(Map.of(
+                "id", List.of("1"),
+                "count", List.of("20"),
+                "includeNotPresent", List.of("false")
+        ))).thenReturn(artistInfo2Response);
+
+        var result = browsingService.getArtistInfo2("1");
+        assertThat(result).isEqualTo(artistInfo2Response.getArtistInfo2());
+    }
+
+    @Test
+    void getArtistInfo2_withCountParam() {
+        var artistInfo2Response = artistInfo2Response();
+
+        when(browsingClient.getArtistInfo2(Map.of(
+                "id", List.of("1"),
+                "count", List.of("15"),
+                "includeNotPresent", List.of("false")
+        ))).thenReturn(artistInfo2Response);
+
+        var result = browsingService.getArtistInfo2("1", ArtistInfoParams.create().count(15));
+        assertThat(result).isEqualTo(artistInfo2Response.getArtistInfo2());
+    }
+
+    @Test
+    void getArtistInfo2_withIncludeNotPresentParam() {
+        var artistInfo2Response = artistInfo2Response();
+
+        when(browsingClient.getArtistInfo2(Map.of(
+                "id", List.of("1"),
+                "count", List.of("20"),
+                "includeNotPresent", List.of("true")
+        ))).thenReturn(artistInfo2Response);
+
+        var result = browsingService.getArtistInfo2("1", ArtistInfoParams.create().includeNotPresent(true));
+        assertThat(result).isEqualTo(artistInfo2Response.getArtistInfo2());
+    }
+
+    @Test
+    void getArtistInfo2_withAllParams() {
+        var artistInfo2Response = artistInfo2Response();
+
+        when(browsingClient.getArtistInfo2(Map.of(
+                "id", List.of("1"),
+                "count", List.of("15"),
+                "includeNotPresent", List.of("true")
+        ))).thenReturn(artistInfo2Response);
+
+        var result = browsingService.getArtistInfo2("1", ArtistInfoParams.create().count(15).includeNotPresent(true));
+        assertThat(result).isEqualTo(artistInfo2Response.getArtistInfo2());
+    }
+
+    @Test
+    void getArtistInfo2_error() {
+        var error = subsonicError();
+        var artistInfo2Response = artistInfo2Response();
+        artistInfo2Response.setError(error);
+
+        when(browsingClient.getArtistInfo2(anyMap())).thenReturn(artistInfo2Response);
+
+        assertSubsonicError(()->browsingService.getArtistInfo2("1"), error);
+    }
+
+    @Test
+    void getAlbumInfo() {
+        var albumInfoResponse = albumInfoResponse();
+
+        when(browsingClient.getAlbumInfo("1")).thenReturn(albumInfoResponse);
+
+        var result = browsingService.getAlbumInfo("1");
+        assertThat(result).isEqualTo(albumInfoResponse.getAlbumInfo());
+    }
+
+    @Test
+    void getAlbumInfo_error() {
+        var error = subsonicError();
+        var albumInfoResponse = albumInfoResponse();
+        albumInfoResponse.setError(error);
+
+        when(browsingClient.getAlbumInfo("1")).thenReturn(albumInfoResponse);
+
+        assertSubsonicError(()->browsingService.getAlbumInfo("1"), error);
     }
 }

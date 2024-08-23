@@ -99,6 +99,14 @@ public class CommonIntegrationTestCode {
 
         // Get Genres
         assertThat(subsonic.browsing().getGenres().get(0).getName()).isEqualTo("Silence");
+
+        // Get Artist Info
+        assertThat(subsonic.browsing().getArtistInfo(firstArtist.getId())).isNotNull();
+        assertThat(subsonic.browsing().getArtistInfo2(firstArtist.getId())).isNotNull();
+
+        // Get Album Info
+        assertThat(subsonic.browsing().getAlbumInfo(firstArtistAlbum.getId())).isNotNull();
+        assertThat(subsonic.browsing().getAlbumInfo2(firstArtistAlbum.getId())).isNotNull();
     }
 
     public static void search(SubsonicBaseContainer container){
@@ -122,6 +130,26 @@ public class CommonIntegrationTestCode {
         assertThat(song2.getAlbum()).isEqualTo("Test Album");
         assertThat(song2.getArtist()).isEqualTo("Test Artist");
         assertThat(song2.getTitle()).endsWith("Test Title 2");
+    }
+
+    public static void lists(SubsonicBaseContainer container){
+        var subsonic = subsonic(container, "admin", "admin");
+
+        container.addMusicFolder("/misc");
+        container.addMusicFolder("/test");
+        scanLibrary(subsonic);
+
+        // Get Album List
+        var albums = subsonic.lists().getAlbumList().getAlbums();
+        assertThat(albums).hasSize(2);
+        assertThat(albums.get(0).getAlbum()).isIn("Misc Album", "Test Album");
+        assertThat(albums.get(1).getAlbum()).isIn("Misc Album", "Test Album");
+
+        // Get Album List 2
+        var albums2 = subsonic.lists().getAlbumList2().getAlbums();
+        assertThat(albums2).hasSize(2);
+        assertThat(albums2.get(0).getName()).isIn("Misc Album", "Test Album");
+        assertThat(albums2.get(1).getName()).isIn("Misc Album", "Test Album");
     }
 
     public static void playlist(SubsonicBaseContainer container){
@@ -260,6 +288,10 @@ public class CommonIntegrationTestCode {
 
         starred2 = subsonic.lists().getStarred2();
         assertThat(starred2.getArtists()).hasSize(0);
+
+        subsonic.annotation().setRating(song.getId(), 3);
+        song = subsonic.searching().search3("2 seconds").getSongs().get(0);
+        assertThat(song.getUserRating()).isEqualTo(3);
     }
 
     public static void userFlow(SubsonicBaseContainer container, boolean supportsVideo) {

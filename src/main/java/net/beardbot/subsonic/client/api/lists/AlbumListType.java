@@ -16,26 +16,22 @@
  */
 package net.beardbot.subsonic.client.api.lists;
 
-import feign.QueryMap;
-import feign.RequestLine;
-import org.subsonic.restapi.SubsonicResponse;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-import java.util.List;
-import java.util.Map;
+@RequiredArgsConstructor
+@Getter
+public enum AlbumListType {
+    RANDOM("random"),
+    NEWEST("newest"),
+    HIGHEST("highest"),
+    FREQUENT("frequent"),
+    RECENT("recent"),
+    ALPHABETICAL_BY_NAME("alphabeticalByName"),
+    ALPHABETICAL_BY_ARTIST("alphabeticalByArtist"),
+    STARRED("starred"),
+    BY_YEAR("byYear"),
+    BY_GENRE("byGenre");
+    private final String value;
 
-public interface ListsClient {
-    @RequestLine("GET /rest/getNowPlaying")
-    SubsonicResponse getNowPlaying();
-
-    @RequestLine("GET /rest/getStarred")
-    SubsonicResponse getStarred();
-
-    @RequestLine("GET /rest/getStarred2")
-    SubsonicResponse getStarred2();
-
-    @RequestLine("GET /rest/getAlbumList")
-    SubsonicResponse getAlbumList(@QueryMap Map<String, List<String>> params);
-
-    @RequestLine("GET /rest/getAlbumList2")
-    SubsonicResponse getAlbumList2(@QueryMap Map<String,List<String>> params);
 }

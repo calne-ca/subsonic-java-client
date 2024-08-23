@@ -44,4 +44,7 @@ public interface AnnotationClient {
 
     @RequestLine("GET /rest/unstar?artistId={artistId}")
     SubsonicResponse unstarByArtistId(@Param("artistId") String artistId);
+
+    @RequestLine("GET /rest/setRating?id={id}&rating={rating}")
+    SubsonicResponse setRating(@Param("id") String id, @Param("rating") int rating);
 }

@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "urlPath": "/rest/star",
+    "urlPath": "/rest/getAlbumList2",
     "queryParameters" : {
       "u" : {
         "equalTo" : "testUser"
@@ -21,14 +21,20 @@
       "c" : {
         "equalTo" : "testClient"
       },
-      "id" : {
-        "equalTo" : "1"
+      "type" : {
+        "equalTo" : "random"
+      },
+      "size" : {
+        "equalTo" : "10"
+      },
+      "offset" : {
+        "equalTo" : "0"
       }
     }
   },
   "response": {
     "status": 200,
-    "bodyFileName": "empty.xml",
+    "bodyFileName": "lists/getAlbumList2.xml",
     "headers": {
       "Content-Type": "text/xml;charset=UTF-8"
     }

@@ -130,4 +130,20 @@ class AnnotationsServiceTest {
         when(annotationClient.unstarByArtistId("1")).thenReturn(errorResponse);
         assertSubsonicError(()->annotationService.unstarArtistID3("1"), error);
     }
+
+    @Test
+    void setRating() {
+        when(annotationClient.setRating("1", 3)).thenReturn(subsonicResponse());
+        annotationService.setRating("1", 3);
+    }
+
+    @Test
+    void setRating_error() {
+        var error = subsonicError();
+        var errorResponse = subsonicResponse();
+        errorResponse.setError(error);
+
+        when(annotationClient.setRating("1", 3)).thenReturn(errorResponse);
+        assertSubsonicError(()->annotationService.setRating("1", 3), error);
+    }
 }

@@ -49,4 +49,9 @@ public class AnnotationsApiTest {
         subsonic(uri).annotation().unstarAlbumID3("1");
         subsonic(uri).annotation().unstarArtistID3("1");
     }
+
+    @Test
+    void setRating(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
+        subsonic(uri).annotation().setRating("1", 3);
+    }
 }
