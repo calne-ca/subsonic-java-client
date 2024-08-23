@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.5.0] - 2024-08-23
+
+### Added
+
+- New API implementations:
+  - Lists
+    - getAlbumList
+    - getAlbumList2
+  - Annotation
+    - setRating
+  - Browsing
+    - getAlbumInfo
+    - getAlbumInfo2
+    - getArtistInfo
+    - getArtistInfo2
+
 ## [0.4.0] - 2024-07-27
 
 ### Added

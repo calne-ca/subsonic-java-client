@@ -7,7 +7,7 @@ A Java Client for the [Subsonic API](http://www.subsonic.org/pages/api.jsp).
 <dependency>
     <groupId>net.beardbot</groupId>
     <artifactId>subsonic-client</artifactId>
-    <version>0.4.0</version>
+    <version>0.5.0</version>
 </dependency>
 ```
 
@@ -39,15 +39,15 @@ For example airsonic does not support any chat operations while subsonic does.
 |                        | **getSong**                | **0.1.0**       |
 |                        | getVideos                  | -               |
 |                        | getVideoInfo               | -               |
-|                        | getArtistInfo              | -               |
-|                        | getArtistInfo2             | -               |
-|                        | getAlbumInfo               | -               |
-|                        | getAlbumInfo2              | -               |
+|                        | **getArtistInfo**          | **0.5.0**       |
+|                        | **getArtistInfo2**         | **0.5.0**       |
+|                        | **getAlbumInfo**           | **0.5.0**       |
+|                        | **getAlbumInfo2**          | **0.5.0**       |
 |                        | getSimilarSongs            | -               |
 |                        | getSimilarSongs2           | -               |
 |                        | getTopSongs                | -               |
-| Album/song lists       | getAlbumList               | -               |
-|                        | getAlbumList2              | -               |
+| Album/song lists       | **getAlbumList**           | **0.5.0**       |
+|                        | **getAlbumList2**          | **0.5.0**       |
 |                        | getRandomSongs             | -               |
 |                        | getSongsByGenre            | -               |
 |                        | **getNowPlaying**          | **0.1.0**       |
@@ -70,7 +70,7 @@ For example airsonic does not support any chat operations while subsonic does.
 |                        | **getAvatar**              | **0.1.0**       |
 | Media annotation       | **star**                   | **0.4.0**       |
 |                        | **unstar**                 | **0.4.0**       |
-|                        | setRating                  | -               |
+|                        | **setRating**              | **0.5.0**       |
 |                        | **scrobble**               | **0.1.0**       |
 | Sharing                | getShares                  | -               |
 |                        | createShare                | -               |
