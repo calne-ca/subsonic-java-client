@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.5.1] - 2024-08-24
+
+### Fixed
+
+- Fixed wrong access modifiers for classes:
+  - net.beardbot.subsonic.client.api.browsing.ArtistParams
+  - net.beardbot.subsonic.client.api.browsing.ArtistInfoParams
+  - net.beardbot.subsonic.client.api.lists.AlbumListParams
+
 ## [0.5.0] - 2024-08-23
 
 ### Added

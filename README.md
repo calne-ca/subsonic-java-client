@@ -7,7 +7,7 @@ A Java Client for the [Subsonic API](http://www.subsonic.org/pages/api.jsp).
 <dependency>
     <groupId>net.beardbot</groupId>
     <artifactId>subsonic-client</artifactId>
-    <version>0.5.0</version>
+    <version>0.5.1</version>
 </dependency>
 ```
 
