@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-class ArtistInfoParams extends ApiParams {
+public class ArtistInfoParams extends ApiParams {
     public static ArtistInfoParams create(){
         return new ArtistInfoParams();
     }

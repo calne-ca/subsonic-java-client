@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 import net.beardbot.subsonic.client.base.ApiParams;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-class ArtistParams extends ApiParams {
+public class ArtistParams extends ApiParams {
     public static ArtistParams create(){
         return new ArtistParams();
     }

@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-class AlbumListParams extends ApiParams {
+public class AlbumListParams extends ApiParams {
     public static AlbumListParams create(){
         return new AlbumListParams();
     }
