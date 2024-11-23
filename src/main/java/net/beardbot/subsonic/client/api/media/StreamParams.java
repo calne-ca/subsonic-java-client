@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 import net.beardbot.subsonic.client.base.ApiParams;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-class StreamParams extends ApiParams {
+public class StreamParams extends ApiParams {
     public static StreamParams create(){
         return new StreamParams();
     }
@@ -33,6 +33,11 @@ class StreamParams extends ApiParams {
 
     public StreamParams maxBitRate(int maxBitRate) {
         setParam("maxBitRate", String.valueOf(maxBitRate));
+        return this;
+    }
+
+    public StreamParams estimateContentLength(boolean estimateContentLength) {
+        setParam("estimateContentLength", String.valueOf(estimateContentLength));
         return this;
     }
 }

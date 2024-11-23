@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.6.0] - 2024-11-23
+
+### Added
+
+- Support for *estimateContentLength* parameter in stream operation
+  - Can be set either globally in the *SubsonicPreferences* or passed with a *StreamParams* object to the stream method.
+    Params passed directly to a method will override the global preferences though, so be careful when doing so.
+
+### Breaking Changes
+
+- All signatures of the  methods in *media()* have changed:
+  - All methods now return an instance of a new class *MediaStream* instead if an InputStream or URL.
+  - URL methods have been removed all-together because the logic is now implemented in *MediaStream*.
+  - Before:
+    ````java
+      InputStream stream = subsonic.media().stream(1);
+      URL streamUrl = subsonic.media().streamUrl(1);
+    ````
+  - Now:
+    ````java
+      MediaStream stream = subsonic.media().stream(1);
+  
+      InputStream inputStream = stream.getInputStream();
+      URL streamUrl = stream.getUrl();
+      int contentLength = stream.getContentLength(); // This value changes based on the estimateContentLength param
+    ````
+
 ## [0.5.1] - 2024-08-24
 
 ### Fixed

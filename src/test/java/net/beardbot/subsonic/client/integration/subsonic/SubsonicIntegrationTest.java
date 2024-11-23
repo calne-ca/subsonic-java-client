@@ -73,7 +73,7 @@ public class SubsonicIntegrationTest {
 
     @Test
     public void songDownloadAndStream() {
-        CommonIntegrationTestCode.songDownloadAndStream(subsonicContainer);
+        CommonIntegrationTestCode.songDownloadAndStream(subsonicContainer, 250);
     }
 
     @Test

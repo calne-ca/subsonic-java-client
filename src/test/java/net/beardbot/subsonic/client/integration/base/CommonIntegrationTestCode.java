@@ -19,6 +19,7 @@ package net.beardbot.subsonic.client.integration.base;
 import lombok.SneakyThrows;
 import net.beardbot.subsonic.client.Subsonic;
 import net.beardbot.subsonic.client.SubsonicPreferences;
+import net.beardbot.subsonic.client.api.media.StreamParams;
 import net.beardbot.subsonic.client.api.playlist.UpdatePlaylistParams;
 import net.beardbot.subsonic.client.api.search.SearchParams;
 import net.beardbot.subsonic.client.api.usermanagement.CreateUserParams;
@@ -203,7 +204,7 @@ public class CommonIntegrationTestCode {
     }
 
     @SneakyThrows
-    public static void songDownloadAndStream(SubsonicBaseContainer container) {
+    public static void songDownloadAndStream(SubsonicBaseContainer container, int expectedDownSampledSize) {
         var subsonic = subsonic(container, "admin", "admin");
 
         container.addMusicFolder("/test");
@@ -213,15 +214,22 @@ public class CommonIntegrationTestCode {
 
         var song = subsonic.searching().search3("2 seconds").getSongs().get(0);
 
-        byte[] downloadedSongBytes = subsonic.media().download(song.getId()).readAllBytes();
+        byte[] downloadedSongBytes = subsonic.media().download(song.getId()).getInputStream().readAllBytes();
         assertThat(downloadedSongBytes).isNotEmpty();
         assertThat(downloadedSongBytes).containsExactly(songBytes);
 
         assertThat(subsonic.lists().getNowPlaying()).isEmpty();
 
-        byte[] streamedSongBytes = subsonic.media().stream(song.getId()).readAllBytes();
+        var stream = subsonic.media().stream(song.getId());
+        byte[] streamedSongBytes = stream.getInputStream().readAllBytes();
         assertThat(streamedSongBytes).isNotEmpty();
         assertThat(streamedSongBytes).containsExactly(songBytes);
+        assertThat(stream.getContentLength()).isEqualTo(45593);
+
+        var streamParamsDownSampled = StreamParams.create().estimateContentLength(true).maxBitRate(1);
+        var streamDownSampled = subsonic.media().stream(song.getId(), streamParamsDownSampled);
+        assertThat(streamDownSampled.getInputStream().readAllBytes()).isNotEmpty();
+        assertThat(streamDownSampled.getContentLength()).isEqualTo(expectedDownSampledSize);
 
         var nowPlaying = subsonic.lists().getNowPlaying();
         assertThat(nowPlaying).hasSize(1);
@@ -243,7 +251,7 @@ public class CommonIntegrationTestCode {
 
         var song = subsonic.searching().search3("2 seconds").getSongs().get(0);
 
-        byte[] downloadCoverArBytes = subsonic.media().getCoverArt(song.getCoverArtId()).readAllBytes();
+        byte[] downloadCoverArBytes = subsonic.media().getCoverArt(song.getCoverArtId()).getInputStream().readAllBytes();
         assertThat(downloadCoverArBytes).isNotEmpty();
         assertThat(downloadCoverArBytes).containsExactly(coverArtBytes);
     }
