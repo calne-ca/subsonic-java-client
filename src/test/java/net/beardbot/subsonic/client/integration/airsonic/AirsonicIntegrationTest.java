@@ -74,7 +74,7 @@ public class AirsonicIntegrationTest {
 
     @Test
     public void songDownloadAndStream() {
-        CommonIntegrationTestCode.songDownloadAndStream(airsonicContainer);
+        CommonIntegrationTestCode.songDownloadAndStream(airsonicContainer, 500);
     }
 
     @Test

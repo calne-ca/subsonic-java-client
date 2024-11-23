@@ -19,19 +19,8 @@ package net.beardbot.subsonic.client.api.media;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import net.beardbot.subsonic.client.Subsonic;
-import net.beardbot.subsonic.client.base.*;
-import net.beardbot.subsonic.client.utils.JaxbUtil;
-import org.subsonic.restapi.ErrorCode;
-import org.subsonic.restapi.SubsonicResponse;
 
-import java.io.BufferedInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.Collections;
-
-import static net.beardbot.subsonic.client.utils.SubsonicResponseErrorHandler.handleError;
 
 @Slf4j
 public class MediaService {
@@ -42,85 +31,65 @@ public class MediaService {
     }
 
     @SneakyThrows
-    public InputStream stream(String id){
-        var url = streamUrl(id);
-        log.debug("Fetching audio stream '{}'.", url);
-
-        return safeOpenStream(url);
-    }
-
-    @SneakyThrows
-    public URL streamUrl(String id){
+    public MediaStream stream(String id){
         var params = StreamParams.create()
                 .format(subsonic.getPreferences().getStreamFormat())
-                .maxBitRate(subsonic.getPreferences().getStreamBitRate()).getParamMap();
+                .maxBitRate(subsonic.getPreferences().getStreamBitRate())
+                .estimateContentLength(subsonic.getPreferences().isEstimateContentLength());
 
+        return stream(id, params);
+    }
+
+    public MediaStream stream(String id, StreamParams streamParams){
+        var params = streamParams.getParamMap();
         params.put("id", Collections.singletonList(id));
 
-        return subsonic.createUrl("stream", params);
+        var url = subsonic.createUrl("stream", params);
+
+        log.debug("Fetching audio stream '{}'.", url);
+
+        return new MediaStream(url);
     }
 
     @SneakyThrows
-    public InputStream download(String id){
+    public MediaStream download(String id){
         var params = DownloadParams.create().id(id);
         log.debug("Downloading song with params '{}'.", params.getParamMapForLogging());
 
         var url = subsonic.createUrl("download", params.getParamMap());
 
-        return safeOpenStream(url);
+        log.debug("Fetching audio stream '{}'.", url);
+
+        return new MediaStream(url);
     }
 
-    public InputStream getCoverArt(String id){
+    public MediaStream getCoverArt(String id){
         return getCoverArt(id, CoverArtParams.create());
     }
 
     @SneakyThrows
-    public InputStream getCoverArt(String id, CoverArtParams coverArtParams){
-        var url = getCoverArtUrl(id, coverArtParams);
-        log.debug("Fetching cover art with params '{}'.", coverArtParams);
-        return safeOpenStream(url);
-    }
-
-    public URL getCoverArtUrl(String id){
-        return getCoverArtUrl(id, CoverArtParams.create());
-    }
-
-    public URL getCoverArtUrl(String id, CoverArtParams coverArtParams){
+    public MediaStream getCoverArt(String id, CoverArtParams coverArtParams){
         var params = coverArtParams.getParamMap();
         params.put("id",Collections.singletonList(id));
 
-        return subsonic.createUrl("getCoverArt", params);
+        var url = subsonic.createUrl("getCoverArt", params);
+
+        log.debug("Fetching cover art with params '{}'.", coverArtParams);
+        return new MediaStream(url);
     }
 
-    public InputStream getAvatar(){
+    public MediaStream getAvatar(){
         return getAvatar(subsonic.getPreferences().getUsername());
     }
 
     @SneakyThrows
-    public InputStream getAvatar(String username){
+    public MediaStream getAvatar(String username){
         var params = AvatarParams.create().username(username);
 
         log.debug("Downloading avatar with params '{}'.", params.getParamMapForLogging());
 
         var url = subsonic.createUrl("getAvatar", params.getParamMap());
 
-        return safeOpenStream(url);
-    }
-
-    private InputStream safeOpenStream(URL url){
-        log.debug("Downloading resource {}", url);
-        
-        try {
-            var connection =  url.openConnection();
-            var inputStream = connection.getInputStream();
-            if (connection.getContentType().contains("xml")){
-                handleError(JaxbUtil.unmarshall(inputStream, SubsonicResponse.class));
-            }
-            return new BufferedInputStream(inputStream);
-        } catch (FileNotFoundException e) {
-            throw new SubsonicException(ErrorCode.DATA_NOT_FOUND, "The requested data was not found.");
-        } catch (IOException e) {
-            throw new SubsonicException(ErrorCode.GENERIC_ERROR, "Unknown error.");
-        }
+        return new MediaStream(url);
     }
 }

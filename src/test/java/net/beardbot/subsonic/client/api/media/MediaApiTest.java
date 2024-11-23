@@ -26,6 +26,7 @@ import ru.lanwen.wiremock.ext.WiremockUriResolver.WiremockUri;
 
 import java.io.IOException;
 
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static net.beardbot.subsonic.client.api.TestUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,66 +37,77 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MediaApiTest {
     @Test
     void stream(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
-        var inputStream = subsonic(uri).media().stream("6303");
-        assertThat(toByteArray(inputStream)).startsWith(0x49, 0x44, 0x33);
+        stub(server);
+        var stream = subsonic(uri).media().stream("6303");
+        assertThat(toByteArray(stream.getInputStream())).startsWith(0x19, 0x44, 0x33);
+    }
+
+    @Test
+    void stream_withParams(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
+        stub(server);
+        var stream = subsonic(uri).media().stream("6303", StreamParams.create().estimateContentLength(true).format("mp3").maxBitRate(128));
+        assertThat(toByteArray(stream.getInputStream())).startsWith(0x19, 0x44, 0x33);
+        assertThat(stream.getContentLength()).isEqualTo(3);
     }
 
     @Test
     void stream_error(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
-        assertSubsonicError(()->subsonic(uri).media().stream("999999999999"), subsonicError());
+        assertSubsonicError(()->subsonic(uri).media().stream("999999999999").getInputStream(), subsonicError());
     }
 
     @Test
     void streamUrl(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) throws IOException {
-        var url = subsonic(uri).media().streamUrl("6303");
+        var url = subsonic(uri).media().stream("6303").getUrl();
         assertThat(url.getQuery()).contains("id=6303");
         assertThat(toByteArray(url.openStream())).startsWith(0x49, 0x44, 0x33);
     }
 
     @Test
     void download(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
-        var inputStream = subsonic(uri).media().download("6303");
-        assertThat(toByteArray(inputStream)).startsWith(0x49, 0x44, 0x33);
+        stub(server);
+        var stream = subsonic(uri).media().download("6303");
+        assertThat(toByteArray(stream.getInputStream())).startsWith(0x19, 0x44, 0x33);
+        assertThat(stream.getContentLength()).isEqualTo(3);
     }
 
     @Test
     void download_error(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
-        assertSubsonicError(()->subsonic(uri).media().download("999999999999"), subsonicError());
+        assertSubsonicError(()->subsonic(uri).media().download("999999999999").getInputStream(), subsonicError());
     }
 
     @Test
     void getCoverArt(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
-        var inputStream = subsonic(uri).media().getCoverArt("20958");
+        var inputStream = subsonic(uri).media().getCoverArt("20958").getInputStream();
         assertThat(toByteArray(inputStream)).containsSequence(0x4A, 0x46, 0x49, 0x46);
     }
 
     @Test
     void getCoverArt_withParams(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
-        var inputStream = subsonic(uri).media().getCoverArt("20959", CoverArtParams.create().size(500));
+        var inputStream = subsonic(uri).media().getCoverArt("20959", CoverArtParams.create().size(500)).getInputStream();
         assertThat(toByteArray(inputStream)).containsSequence(0x4A, 0x46, 0x49, 0x46);
     }
 
     @Test
     void getCoverArt_error(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
-        assertSubsonicError(()->subsonic(uri).media().getCoverArt("999999999999"), subsonicError());
+        assertSubsonicError(()->subsonic(uri).media().getCoverArt("999999999999").getInputStream(), subsonicError());
     }
 
     @Test
     void getCoverArtUrl(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) throws IOException {
-        var url = subsonic(uri).media().getCoverArtUrl("20958");
+        var url = subsonic(uri).media().getCoverArt("20958").getUrl();
         assertThat(toByteArray(url.openStream())).containsSequence(0x4A, 0x46, 0x49, 0x46);
     }
 
     @Test
     void getCoverArtUrl_withParams(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) throws IOException {
-        var url = subsonic(uri).media().getCoverArtUrl("20959", CoverArtParams.create().size(500));
+        var url = subsonic(uri).media().getCoverArt("20959", CoverArtParams.create().size(500)).getUrl();
         assertThat(url.getQuery()).contains("size=500");
         assertThat(toByteArray(url.openStream())).containsSequence(0x4A, 0x46, 0x49, 0x46);
     }
 
     @Test
     void getAvatar(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
-        var inputStream = subsonic(uri).media().getAvatar();
+        var inputStream = subsonic(uri).media().getAvatar().getInputStream();
         assertThat(toByteArray(inputStream)).containsSequence(0x4A, 0x46, 0x49, 0x46);
     }
 
@@ -103,6 +115,14 @@ public class MediaApiTest {
     @Tag("fails-on-github")
     @Test
     void getAvatar_error(@WiremockResolver.Wiremock WireMockServer server, @WiremockUri String uri) {
-        assertSubsonicError(()->subsonic(uri).media().getAvatar("999999999999"), subsonicError());
+        assertSubsonicError(()->subsonic(uri).media().getAvatar("999999999999").getInputStream(), subsonicError());
+    }
+
+    private void stub(WireMockServer server) {
+        server.stubFor(get(urlPathMatching("/rest/.+"))
+                .willReturn(aResponse()
+                        .withHeader("Content-Length", "3")
+                        .withHeader("Content-Type", "octet-stream")
+                        .withBody(new byte[]{0x19, 0x44, 0x33})));
     }
 }

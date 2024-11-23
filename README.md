@@ -7,7 +7,7 @@ A Java Client for the [Subsonic API](http://www.subsonic.org/pages/api.jsp).
 <dependency>
     <groupId>net.beardbot</groupId>
     <artifactId>subsonic-client</artifactId>
-    <version>0.5.1</version>
+    <version>0.6.0</version>
 </dependency>
 ```
 
@@ -175,8 +175,8 @@ while (child.isDir()){
     child = directory.getchildren().get(0);
 }
 
-InputStream stream = subsonic.media().stream(child.getId());
-someAudioPlayer.play(stream);
+MediaStream stream = subsonic.media().stream(child.getId());
+someAudioPlayer.play(stream.getInputStream());
 ```
 
 ```java

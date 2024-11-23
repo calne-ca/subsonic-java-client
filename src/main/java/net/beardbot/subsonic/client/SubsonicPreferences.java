@@ -28,6 +28,7 @@ public class SubsonicPreferences {
     private String clientName = "SubsonicJavaClient";
     private int streamBitRate = 192;
     private String streamFormat = "mp3";
+    private boolean estimateContentLength = false;
 
     private final SubsonicAuthentication authentication;
 
